@@ -1,2 +1,2 @@
-/mybatis-config.xml
-/userMapper.xml
+/dao/
+/controller/
