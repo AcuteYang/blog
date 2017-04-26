@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -16,13 +18,15 @@ public class UserDaoImpl implements UserDao {
 		return password;
 	}
 	
-	public void insertNewUser(String name, String email, String password, Date birthday){
+	public void insertNewUser(String name, String email, String password, Date birthday, String gender, Integer id){
 		SqlSession sqlSessionOne=sqlSessionFactory.openSession(true);
-		User temp=new User();
-		temp.setBirthday(birthday);
-		temp.setEmail(email);
-		temp.setPassword(password);
-		temp.setName(name);
+		Map<String, Object> temp=new HashMap<String, Object>();
+		temp.put("name", name);
+		temp.put("email",email);
+		temp.put("password",password);
+		temp.put("birthday",birthday);
+		temp.put("gender", gender);
+		temp.put("locationId", id);
 		sqlSessionOne.insert("mapper.userMapper.insertNewUser",temp);
 	}
 }

@@ -78,9 +78,9 @@
    	select password from user where email=#{email}
    </select>
    
-   <insert id="insertNewUser" parameterType="User">
-   insert into user(name,email,password,birthday,gender)
-   values(#{name},#{email},#{password},#{birthday},"F")	
+   <insert id="insertNewUser" parameterType="Map">
+   insert into user(name,email,password,birthday,gender,current_location)
+   values(#{name},#{email},#{password},#{birthday},#{gender},#{locationId})	
    </insert>
    
 </mapper>

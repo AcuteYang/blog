@@ -2,7 +2,9 @@ package controller;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,14 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import dao.LocationDao;
+import dao.LocationDaoImpl;
 import dao.UserDao;
 import dao.UserDaoImpl;
+import entity.Location;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 	
 	private UserDao userDao=new UserDaoImpl(); 
+	private LocationDao locationDao=new LocationDaoImpl();
 	
 	@RequestMapping(value="/")
 	public String displayLogin(){
@@ -40,10 +46,22 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/register")
-	public String passwordConfirmed(@RequestParam String name, @RequestParam String email, @RequestParam String password, @RequestParam String passwordConfirmed, @RequestParam Date birthday, Model model){
+	public String passwordConfirmed(@RequestParam String name, @RequestParam String email, @RequestParam String password,
+			@RequestParam String passwordConfirmed, @RequestParam Date birthday, @RequestParam String gender,@RequestParam String country, 
+			@RequestParam String state, @RequestParam String city, Model model){
 		if(password.equals(passwordConfirmed)){
 			/*model.addAttribute("message", "register successful");*/
-			userDao.insertNewUser(name, email, password, birthday);
+			Location temp=new Location();
+			temp.setCountry(country);
+			temp.setState(state);
+			temp.setCity(city);
+			Integer locationId=locationDao.getLocationId(temp);
+			if(locationId==null){
+				locationDao.insertNewLocation(temp);
+			}
+			Integer id=locationDao.getLocationId(temp);
+			temp.setLocationId(id);
+			userDao.insertNewUser(name, email, password, birthday,gender,id);
 			return "login";
 		}else{
 			model.addAttribute("message", "password confirmed dismatched");

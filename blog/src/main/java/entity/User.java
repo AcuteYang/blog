@@ -11,7 +11,7 @@ public class User {
 	private String gender;
 	private Date birthday;
 	private int birthplace;
-	private int currentLocation;
+	private Location currentLocation;
 	private Timestamp createdTime;
 	public int getUserId() {
 		return userId;
@@ -55,10 +55,10 @@ public class User {
 	public void setBirthplace(int birthplace) {
 		this.birthplace = birthplace;
 	}
-	public int getCurrentLocation() {
+	public Location getCurrentLocation() {
 		return currentLocation;
 	}
-	public void setCurrentLocation(int currentLocation) {
+	public void setCurrentLocation(Location currentLocation) {
 		this.currentLocation = currentLocation;
 	}
 	public Timestamp getCreatedTime() {
