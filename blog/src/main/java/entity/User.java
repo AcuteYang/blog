@@ -2,6 +2,7 @@ package entity;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class User {
 	private int userId;
@@ -13,6 +14,14 @@ public class User {
 	private int birthplace;
 	private Location currentLocation;
 	private Timestamp createdTime;
+	private List<User> friend;
+	
+	public List<User> getFriend() {
+		return friend;
+	}
+	public void setFriend(List<User> friend) {
+		this.friend = friend;
+	}
 	public int getUserId() {
 		return userId;
 	}

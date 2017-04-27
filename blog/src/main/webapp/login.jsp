@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<h1>Welcome</h1>
-		<form action="/blog/user/login">
+		<form action="/blog/user/loginResult">
 			<label>Email</label><input id="email" name="email" type="text"/><br>
 			<label>Password</label><input id="password" name="password" type="password"/><br>
 			<input class="submit" type="submit" value="Enter">

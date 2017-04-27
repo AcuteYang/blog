@@ -29,4 +29,10 @@ public class UserDaoImpl implements UserDao {
 		temp.put("locationId", id);
 		sqlSessionOne.insert("mapper.userMapper.insertNewUser",temp);
 	}
+
+	public User getUserByEmail(String email) {
+		SqlSession sqlSession=sqlSessionFactory.openSession(true);
+		User user = sqlSession.selectOne("mapper.userMapper.selectUserByEmail",email);
+		return user;
+	}
 }

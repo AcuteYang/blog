@@ -32,6 +32,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login")
+	public String login(){
+		return "login";
+	}
+	
+	@RequestMapping(value="/loginResult")
 	public String validatePassword(@RequestParam String email, @RequestParam String password,Model model){
 		String pwd=userDao.getPassword(email);
 		if(pwd==null){
@@ -39,10 +44,17 @@ public class UserController {
 		}
 		else if(pwd.equals(password)){
 			model.addAttribute("message", "login successfully");
+			model.addAttribute("email",email);
 		}else{
 			model.addAttribute("message", "login fail");
 		}
-		return "login";
+		return "redirect:/user/display";
+	}
+	
+	@RequestMapping(value="/display")
+	public String userDisplay(@RequestParam String email, Model model){
+		model.addAttribute("user",userDao.getUserByEmail(email));
+		return "display";
 	}
 	
 	@RequestMapping(value="/register")
