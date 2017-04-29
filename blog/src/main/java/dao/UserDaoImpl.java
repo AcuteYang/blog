@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -34,5 +35,11 @@ public class UserDaoImpl implements UserDao {
 		SqlSession sqlSession=sqlSessionFactory.openSession(true);
 		User user = sqlSession.selectOne("mapper.userMapper.selectUserByEmail",email);
 		return user;
+	}
+
+	public List<User> getFriend(Integer userId) {
+		SqlSession sqlSession=sqlSessionFactory.openSession(true);
+		List<User> friend=sqlSession.selectList("mapper.userMapper.selectFriend", userId);
+		return friend;
 	}
 }

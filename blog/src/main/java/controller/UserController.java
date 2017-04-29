@@ -18,6 +18,7 @@ import dao.LocationDaoImpl;
 import dao.UserDao;
 import dao.UserDaoImpl;
 import entity.Location;
+import entity.User;
 
 @Controller
 @RequestMapping("/user")
@@ -53,7 +54,11 @@ public class UserController {
 	
 	@RequestMapping(value="/display")
 	public String userDisplay(@RequestParam String email, Model model){
-		model.addAttribute("user",userDao.getUserByEmail(email));
+		User user=userDao.getUserByEmail(email);
+		List<User> friend=userDao.getFriend(user.getUserId());
+		user.setFriend(friend);
+		model.addAttribute("user",user);
+		
 		return "display";
 	}
 	

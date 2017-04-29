@@ -17,6 +17,10 @@
   		<result property="city" column="city"/>
   	</association>
   </resultMap>
+  
+  <resultMap id="friend" type="User" extends="detailedUser">
+  	<collection property="friend" ofType="User" resultMap="detailedUser" columnPrefix="friend_"/>
+  </resultMap>
   <select id="selectUser" resultMap="detailedUser">
     select * from user
   </select>
@@ -29,8 +33,9 @@
   	select * from user where user_id=#{userId}
   </select>
   <select id="selectUserByEmail" resultMap="detailedUser" parameterType="String">
-  	select * from user 
-  	join location on user.current_location = location.location_id 
+  	select * 
+  	from user join location 
+  	on user.current_location = location.location_id 
   	where email=#{email}
   </select>
   <delete id="deleteUser">
@@ -90,8 +95,16 @@
    </select>
    
    <insert id="insertNewUser" parameterType="Map">
-   insert into user(name,email,password,birthday,gender,current_location)
-   values(#{name},#{email},#{password},#{birthday},#{gender},#{locationId})	
+   	insert into user(name,email,password,birthday,gender,current_location)
+   	values(#{name},#{email},#{password},#{birthday},#{gender},#{locationId})	
    </insert>
+   
+   <select id="selectFriend" parameterType="Integer" resultMap="detailedUser">
+   	select user.user_id as user_id, name, email, birthday, gender, 
+   	location_id, country, state, city
+   	from user join friend on user.user_id=friend.friend_id 
+   	join location on location.location_id=user.current_location
+   	where friend.user_id=#{userId}
+   </select>
    
 </mapper>
