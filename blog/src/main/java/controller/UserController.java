@@ -1,18 +1,13 @@
 package controller;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import dao.LocationDao;
 import dao.LocationDaoImpl;
 import dao.UserDao;
@@ -64,7 +59,7 @@ public class UserController {
 	
 	@RequestMapping(value="/register")
 	public String passwordConfirmed(@RequestParam String name, @RequestParam String email, @RequestParam String password,
-			@RequestParam String passwordConfirmed, @RequestParam Date birthday, @RequestParam String gender,@RequestParam String country, 
+			@RequestParam String passwordConfirmed, @RequestParam String birthday, @RequestParam String gender,@RequestParam String country, 
 			@RequestParam String state, @RequestParam String city, Model model){
 		if(password.equals(passwordConfirmed)){
 			/*model.addAttribute("message", "register successful");*/
@@ -78,7 +73,22 @@ public class UserController {
 			}
 			Integer id=locationDao.getLocationId(temp);
 			temp.setLocationId(id);
-			userDao.insertNewUser(name, email, password, birthday,gender,id);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+			Date birth=new Date(0);
+			try {
+				birth = (Date) sdf.parse(birthday);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String g = null;
+			if(gender.equals("Female")){
+				g="F";
+			}
+			if(gender.equals("Male")){
+				g="M";
+			}
+			userDao.insertNewUser(name, email, password, birth,g,id);
 			return "login";
 		}else{
 			model.addAttribute("message", "password confirmed dismatched");

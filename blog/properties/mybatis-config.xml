@@ -12,6 +12,7 @@
   <typeAliases>
   <typeAlias alias="User" type="entity.User"/>
   <typeAlias alias="Location" type="entity.Location"/>
+  <typeAlias alias="Blog" type="entity.Blog"/>
   </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -27,5 +28,6 @@
   <mappers>
     <mapper resource="userMapper.xml"/>
     <mapper resource="locationMapper.xml"/>
+    <mapper resource="blogMapper.xml"/>
   </mappers>
 </configuration>
