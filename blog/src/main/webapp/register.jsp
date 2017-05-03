@@ -6,8 +6,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Registration</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css"/>
-	<link rel="stylesheet" type="text/css" href="css/register.css"/>
+	<link rel="stylesheet" type="text/css" href="/blog/css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="/blog/css/register.css"/>
 </head>
 
 <body>

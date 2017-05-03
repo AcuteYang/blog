@@ -1,26 +1,23 @@
 package controller;
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import dao.LocationDao;
-import dao.LocationDaoImpl;
 import dao.UserDao;
 import dao.UserDaoImpl;
-import entity.Location;
 import entity.User;
+import service.UserService;
+import service.UserServiceImpl;
+import utility.ServiceStatus;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 	
 	private UserDao userDao=new UserDaoImpl(); 
-	private LocationDao locationDao=new LocationDaoImpl();
+	private UserService userService=new UserServiceImpl();
 	
 	@RequestMapping(value="/")
 	public String displayLogin(){
@@ -34,16 +31,10 @@ public class UserController {
 	
 	@RequestMapping(value="/loginResult")
 	public String validatePassword(@RequestParam String email, @RequestParam String password,Model model){
-		String pwd=userDao.getPassword(email);
-		if(pwd==null){
-			model.addAttribute("message","email not found");
-		}
-		else if(pwd.equals(password)){
-			model.addAttribute("message", "login successfully");
-			model.addAttribute("email",email);
-		}else{
-			model.addAttribute("message", "login fail");
-		}
+		ServiceStatus status=userService.login(email, password);
+		model.addAttribute("message", status.getStatusMessage());
+		model.addAttribute("email",email);
+		
 		return "redirect:/user/display";
 	}
 	
@@ -61,8 +52,8 @@ public class UserController {
 	public String passwordConfirmed(@RequestParam String name, @RequestParam String email, @RequestParam String password,
 			@RequestParam String passwordConfirmed, @RequestParam String birthday, @RequestParam String gender,@RequestParam String country, 
 			@RequestParam String state, @RequestParam String city, Model model){
-		if(password.equals(passwordConfirmed)){
-			/*model.addAttribute("message", "register successful");*/
+		ServiceStatus status=userService.register(name, email, password, passwordConfirmed, birthday, gender, country, state, city);
+		/*if(password.equals(passwordConfirmed)){
 			Location temp=new Location();
 			temp.setCountry(country);
 			temp.setState(state);
@@ -89,9 +80,17 @@ public class UserController {
 				g="M";
 			}
 			userDao.insertNewUser(name, email, password, birth,g,id);
+		
 			return "login";
 		}else{
-			model.addAttribute("message", "password confirmed dismatched");
+			model.addAttribute("message", status.getStatusMessage());
+			return "register";
+		}*/
+		int messageNum=status.getStatusCode();
+		if(messageNum==0){
+			return "login";
+		}else{
+			model.addAttribute("message", status.getStatusMessage());
 			return "register";
 		}
 	}

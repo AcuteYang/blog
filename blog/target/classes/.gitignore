@@ -1,4 +1,3 @@
-/entity/
-/blogMapper.xml
-/dao/
+/service/
 /controller/
+/utility/

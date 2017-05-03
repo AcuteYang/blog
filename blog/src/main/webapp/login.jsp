@@ -5,13 +5,13 @@
 <html>
 	<head>
 		<title>Log In</title>
-		<link rel="stylesheet" type="text/css" href="css/style.css"/>
-		<link rel="stylesheet" type="text/css" href="css/login.css"/>
+		<link rel="stylesheet" type="text/css" href="/blog/css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="/blog/css/login.css"/>
 	</head>
 	<body>
 		<div class="login">
 			<div class="they">
-				<img src="images/login-1.png"/>
+				<img src="/blog/images/login-1.png"/>
 			</div>
 			<div class="interface">
 				<form action="/blog/user/loginResult">

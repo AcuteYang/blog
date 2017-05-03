@@ -14,6 +14,10 @@
 
     <context:component-scan base-package="controller"/>
     <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:resources location="/css/" mapping="/blog/css/**"/>
+    <mvc:resources location="/images/" mapping="/blog/images/**"/>
+    <mvc:default-servlet-handler/>
+    
     
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"></bean>
     
@@ -21,7 +25,8 @@
     	<property name="prefix" value="/"></property>
     	<property name="suffix" value=".jsp"></property>
     </bean>
-
+    
+	
     <!-- ... -->
 
 </beans>
