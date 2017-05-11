@@ -16,6 +16,7 @@
     <mvc:annotation-driven></mvc:annotation-driven>
     <mvc:resources location="/css/" mapping="/blog/css/**"/>
     <mvc:resources location="/images/" mapping="/blog/images/**"/>
+    <mvc:resources location="/script" mapping="/blog/script/**"/>
     <mvc:default-servlet-handler/>
     
     

@@ -3,17 +3,24 @@ package service;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import dao.LocationDao;
 import dao.LocationDaoImpl;
+import dao.RequestDao;
+import dao.RequestDaoImpl;
 import dao.UserDao;
 import dao.UserDaoImpl;
 import entity.Location;
+import entity.Request;
+import entity.User;
 import utility.ServiceStatus;
 
 public class UserServiceImpl implements UserService {
 	private UserDao userDao=new UserDaoImpl();
 	private LocationDao locationDao=new LocationDaoImpl();
+	private RequestDao requestDao=new RequestDaoImpl();
+	
 	public ServiceStatus login(String email, String password) {
 		String pwd=userDao.getPassword(email);
 		ServiceStatus serviceStatus=new ServiceStatus();
@@ -67,6 +74,35 @@ public class UserServiceImpl implements UserService {
 			serviceStatus.setStatusMessage("password confirmed dismatched");
 		}
 		return serviceStatus;
+	}
+	
+	public ServiceStatus sendRequst(Request request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public ServiceStatus dealRequest(Request request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public User userDisplay(String email) {
+		User user=userDao.getUserByEmail(email);
+		List<User> friend=userDao.getFriend(user.getUserId());
+		user.setFriend(friend);
+		return user;
+	}
+
+	public List<User> getStranger(String email) {
+		User user=userDao.getUserByEmail(email);
+		List<User> stranger=userDao.getStranger(user.getUserId());
+		return stranger;
+	}
+	
+	public List<Request> getRequestBySenderId(String email) {
+		User user=userDao.getUserByEmail(email);
+		List<Request> request=requestDao.getRequestListBySenderId(user.getUserId());
+		return request;
 	}
 
 }

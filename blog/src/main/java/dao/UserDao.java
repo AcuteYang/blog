@@ -11,4 +11,5 @@ public interface UserDao {
 	public void insertNewUser(String name, String email, String password, 
 							  Date birthday, String gender, Integer id);
 	public List<User> getFriend(Integer userId);
+	public List<User> getStranger(Integer userId);
 }

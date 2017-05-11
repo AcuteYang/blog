@@ -42,4 +42,10 @@ public class UserDaoImpl implements UserDao {
 		List<User> friend=sqlSession.selectList("mapper.userMapper.selectFriend", userId);
 		return friend;
 	}
+
+	public List<User> getStranger(Integer userId) {
+		SqlSession sqlSession=sqlSessionFactory.openSession(true);
+		List<User> stranger=sqlSession.selectList("mapper.userMapper.selectStranger", userId);
+		return stranger;
+	}
 }
