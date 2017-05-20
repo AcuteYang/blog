@@ -5,19 +5,30 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import dao.LocationDao;
 import dao.LocationDaoImpl;
 import dao.RequestDao;
 import dao.RequestDaoImpl;
 import dao.UserDao;
-import dao.UserDaoImpl;
 import entity.Location;
 import entity.Request;
 import entity.User;
 import utility.ServiceStatus;
 
+@Service
 public class UserServiceImpl implements UserService {
-	private UserDao userDao=new UserDaoImpl();
+	private UserDao userDao;
+
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
 	private LocationDao locationDao=new LocationDaoImpl();
 	private RequestDao requestDao=new RequestDaoImpl();
 	

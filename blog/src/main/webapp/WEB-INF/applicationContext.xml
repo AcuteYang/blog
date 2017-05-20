@@ -13,21 +13,29 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <context:component-scan base-package="controller"/>
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <context:component-scan base-package="dao"/>
+    <context:component-scan base-package="service"/>
+    <mvc:annotation-driven/>
     <mvc:resources location="/css/" mapping="/blog/css/**"/>
     <mvc:resources location="/images/" mapping="/blog/images/**"/>
     <mvc:resources location="/script" mapping="/blog/script/**"/>
     <mvc:default-servlet-handler/>
     
-    
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"></bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
     
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    	<property name="prefix" value="/"></property>
-    	<property name="suffix" value=".jsp"></property>
+    	<property name="prefix" value="/"/>
+    	<property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="userController" class="controller.UserController">
+        <property name="userService" ref="userService"/>
     </bean>
     
-	
-    <!-- ... -->
+	<bean id="userService" class="service.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
 
+    <bean id="userDao" class="dao.UserDaoImpl"/>
+    
 </beans>

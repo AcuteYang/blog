@@ -7,10 +7,12 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import entity.User;
 import utility.MySqlSessionFactory;
 
+@Repository
 public class UserDaoImpl implements UserDao {
 	private SqlSessionFactory sqlSessionFactory=MySqlSessionFactory.createFactory();
 	public String getPassword(String email) {

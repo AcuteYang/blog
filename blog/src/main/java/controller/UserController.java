@@ -17,8 +17,16 @@ import utility.ServiceStatus;
 @RequestMapping("/user")
 public class UserController {
 	
-	private UserService userService=new UserServiceImpl();
+	private UserService userService;
 	
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 	@RequestMapping(value="/")
 	public String displayLogin(){
 		return "register";
