@@ -9,9 +9,17 @@ import entity.Blog;
 import utility.MySqlSessionFactory;
 
 public class BlogDaoImpl implements BlogDao {
-	private SqlSessionFactory sqlSessionFactory=MySqlSessionFactory.createFactory();
+	private SqlSession sqlSession;
+	
+	public SqlSession getSqlSession() {
+		return sqlSession;
+	}
+
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+
 	public List<Blog> getAllBlogs() {
-		SqlSession sqlSession=sqlSessionFactory.openSession(true);
 		List<Blog> blogs=sqlSession.selectList("mapper.blogMapper.selectAllBlogs");
 		return blogs;
 	}

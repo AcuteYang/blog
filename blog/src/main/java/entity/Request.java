@@ -9,10 +9,14 @@ public class Request {
 	private User receiver;
 	private Status requestStatus;
 	
-	private StatusDao statusDao = new StatusDaoImpl();
+	private StatusDao statusDao;
 	
-	public Request(){
-		requestStatus=statusDao.getStatus(1);
+	public StatusDao getStatusDao() {
+		return statusDao;
+	}
+
+	public void setStatusDao(StatusDao statusDao) {
+		this.statusDao = statusDao;
 	}
 	
 	public int getRequestId() {

@@ -9,19 +9,24 @@ import entity.Request;
 import utility.MySqlSessionFactory;
 
 public class RequestDaoImpl implements RequestDao {
-	private SqlSessionFactory sqlSessionFactory=MySqlSessionFactory.createFactory();
+	private SqlSession sqlSession;
+	public SqlSession getSqlSession() {
+		return sqlSession;
+	}
+
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+
 	public void insertNewRequest(Request request) {
-		SqlSession sqlSession=sqlSessionFactory.openSession(true);
 		sqlSession.insert("mapper.requestMapper.insertNewRequest", request);
 	}
 
 	public void updateRequestStatus(Request request) {
-		SqlSession sqlSession=sqlSessionFactory.openSession(true);
 		sqlSession.update("mapper.requestMapper.updateRequestStatus", request);
 	}
 
 	public List<Request> getRequestListBySenderId(Integer senderId) {
-		SqlSession sqlSession=sqlSessionFactory.openSession(true);
 		List<Request> request=sqlSession.selectList("mapper.requestMapper.getRequestListBySenderId", senderId);
 		return request;
 	}

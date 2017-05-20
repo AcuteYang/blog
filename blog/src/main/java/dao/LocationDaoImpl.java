@@ -7,16 +7,23 @@ import entity.Location;
 import utility.MySqlSessionFactory;
 
 public class LocationDaoImpl implements LocationDao {
-	private SqlSessionFactory sqlSessionFactory=MySqlSessionFactory.createFactory();
+	private SqlSession sqlSession;
+	
+	public SqlSession getSqlSession() {
+		return sqlSession;
+	}
+
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+
 	public Integer getLocationId(Location location) {
-		SqlSession sqlSessionOne=sqlSessionFactory.openSession(true);
-		Integer locationId=sqlSessionOne.selectOne("mapper.locationMapper.selectLocationId",location);
+		Integer locationId=sqlSession.selectOne("mapper.locationMapper.selectLocationId",location);
 		return locationId;
 	}
 
 	public void insertNewLocation(Location location) {
-		SqlSession sqlSessionTwo=sqlSessionFactory.openSession(true);
-		sqlSessionTwo.insert("mapper.locationMapper.insertNewLocation",location);
+		sqlSession.insert("mapper.locationMapper.insertNewLocation",location);
 	}
 
 }

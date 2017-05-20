@@ -20,7 +20,9 @@ import utility.ServiceStatus;
 @Service
 public class UserServiceImpl implements UserService {
 	private UserDao userDao;
-
+	private LocationDao locationDao;
+	private RequestDao requestDao;
+	
 	public UserDao getUserDao() {
 		return userDao;
 	}
@@ -28,10 +30,23 @@ public class UserServiceImpl implements UserService {
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-
-	private LocationDao locationDao=new LocationDaoImpl();
-	private RequestDao requestDao=new RequestDaoImpl();
 	
+	public LocationDao getLocationDao() {
+		return locationDao;
+	}
+
+	public void setLocationDao(LocationDao locationDao) {
+		this.locationDao = locationDao;
+	}
+
+	public RequestDao getRequestDao() {
+		return requestDao;
+	}
+
+	public void setRequestDao(RequestDao requestDao) {
+		this.requestDao = requestDao;
+	}
+
 	public ServiceStatus login(String email, String password) {
 		String pwd=userDao.getPassword(email);
 		ServiceStatus serviceStatus=new ServiceStatus();
@@ -48,8 +63,9 @@ public class UserServiceImpl implements UserService {
 		}
 		return serviceStatus;
 	}
-	public ServiceStatus register(String name, String email, String password, String passwordConfirmed, String birthday,
-			String gender, String country, String state, String city) {
+	public ServiceStatus register(String name, String email, String password, 
+			String passwordConfirmed, String birthday,	String gender, 
+			String country, String state, String city) {
 		ServiceStatus serviceStatus=new ServiceStatus();
 		if(password.equals(passwordConfirmed)){
 			Location temp=new Location();

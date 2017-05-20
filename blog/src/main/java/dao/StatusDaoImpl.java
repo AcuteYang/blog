@@ -7,10 +7,17 @@ import entity.Status;
 import utility.MySqlSessionFactory;
 
 public class StatusDaoImpl implements StatusDao {
-	private SqlSessionFactory sqlSessionFactory=MySqlSessionFactory.createFactory();
+	private SqlSession sqlSession;
 	
+	public SqlSession getSqlSession() {
+		return sqlSession;
+	}
+
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+
 	public Status getStatus(int id) {
-		SqlSession sqlSession=sqlSessionFactory.openSession(true);
 		Status status=sqlSession.selectOne("mapper.statusMapper.selectStatus", id);
 		return status;
 	}
