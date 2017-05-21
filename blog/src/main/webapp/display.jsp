@@ -9,9 +9,21 @@
 	<link rel="stylesheet" type="text/css" href="css/display.css">
 </head>
 <body>
+	<div class="navigator">
+		<div class="left">
+			<i class="fa fa-search grey"></i>
+			<input class="input" type="text" placeholder="Search here"/>
+		</div>
+		<div class="right">
+			<div class="box">3</div>
+			<div>
+				<img class="photo" src="images/navigator-avatar.jpeg"/>
+			</div>
+		</div>
+	</div>
 	<div class="header">
-		<div class="avator radius">
-			<img class="small image" src="images/display-avator-image.jpg"/>
+		<div class="avatar radius">
+			<img class="small image" src="images/display-avatar-image.jpg"/>
 		</div>
 		<div class="name">
 			<h2>Aaron Guo
@@ -42,71 +54,95 @@
 	<div class="profile">
 		<div class="person">
 			<div class="information">
+				<div class="title">Education</div>
 				<div class="education card">
-					<div class="column">
-						<div class="attribute">Start</div>
-						<div class="attribute">End</div>
-						<div class="attribute">Degree</div>
-						<div class="attribute">Major</div>
-						<div class="attribute">School</div>
+					<div class="logo">
+						<i class="fa fa-university"></i>
 					</div>
 					<div class="personal">
-						<div class="data">2000-9-9</div>
-						<div class="data">2004-9-9</div>
-						<div class="data">Bachelor</div>
-						<div class="data">Math</div>
-						<div class="data">UDC</div>
+						<div class="data">2000/9/9-2004/9/9</div>
+						<div class="data">Bachelor Mathematics</div>
 					</div>
 				</div>
 			</div>
 			<div class="information">
+				<div class="title">Work</div>
 				<div class="work card">
-					<div class="column">
-						<div class="attribute">Start</div>
-						<div class="attribute">End</div>
-						<div class="attribute">Degree</div>
-						<div class="attribute">Major</div>
-						<div class="attribute">School</div>
+					<div class="logo">
+						<i class="fa fa-qq"></i>
 					</div>
 					<div class="personal">
-						<div class="data">2000-9-9</div>
-						<div class="data">2004-9-9</div>
-						<div class="data">Bachelor</div>
-						<div class="data">Math</div>
-						<div class="data">UDC</div>
+						<div class="data">2000/9/9-2004/9/9</div>
+						<div class="data">Tencent</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="blog card">
-			<div>
-				<h1>I am a blog</h1>
-				<p>qwertyuiopasertyuiop[dfghjklsdfghjkldfghjklzxcvbnm</p>
+		<div class="blog">
+			<div class="title">Blog</div>
+			<div class="card">
+				<div class="context">
+					<h1>Endeavour</h1>
+					<p>Endeavour is a British television detective drama series. It is a prequel to the long-running Inspector Morse and, like that series, is set primarily in Oxford. Shaun Evans portrays a young Endeavour Morse beginning his career as a Detective Constable with the Oxford City Police CID. The series is produced for ITV by Mammoth Screen and Masterpiece co-production for ITV Studios. Following a pilot episode in 2012, the first series was broadcast in 2013, the second in 2014 and the third in January 2016. A fourth series was ordered by ITV, began filming in late spring 2016,[1] and premiered on 8 January 2017.</p>
+				</div>
 			</div>
 		</div>
 		<div class="relation">
+			<div class="title">Stranger</div>
 			<div class="stranger card">
-				<div class="column">
-					<div class="attribute">Name</div>
-					<div class="attribute">Gender</div>
-					<div class="attribute">Birthday</div>
+				<div class="minicard">
+					<div class="photo">
+						<img class="photo" src="images/avatar-1.jpg"/>
+					</div>
+					<div class="unknown">
+						<div class="name">Trewlove</div>
+						<div class="recommendation">China</div>
+					</div>				
 				</div>
-				<div class="personal">
-					<div class="data">Thursday</div>
-					<div class="data">Male</div>
-					<div class="data">1999-9-10</div>
-				</div>
+				<div class="minicard">
+					<div class="photo">
+						<img class="photo" src="images/avatar-2.jpg"/>
+					</div>
+					<div class="unknown">
+						<div class="name">Jakes</div>
+						<div class="recommendation">China</div>
+					</div>
+				</div>	
+				<div class="minicard">
+					<div class="photo">
+						<img class="photo" src="images/avatar-3.jpg"/>
+					</div>
+					<div class="unknown">
+						<div class="name">Strange</div>
+						<div class="recommendation">Computer Science</div>
+					</div>
+				</div>									
 			</div>
+			<div class="title">Friend</div>
 			<div class="friend card">
-				<div class="column">
-					<div class="attribute">Name</div>
-					<div class="attribute">Gender</div>
-					<div class="attribute">Birthday</div>
+				<div class="photo round">
+					<img src="images/avatar-4.jpg"/>
 				</div>
-				<div class="personal">
-					<div class="data">Thursday</div>
-					<div class="data">Male</div>
-					<div class="data">1999-9-10</div>
+				<div class="photo round">
+					<img src="images/avatar-5.jpg"/>
+				</div>
+				<div class="photo round">
+					<img src="images/avatar-6.jpg"/>
+				</div>
+				<div class="photo round">
+					<img src="images/avatar-7.jpg"/>
+				</div>
+				<div class="photo round">
+					<img src="images/avatar-8.jpg"/>
+				</div>
+				<div class="photo round">
+					<img src="images/avatar-9.jpg"/>
+				</div>
+				<div class="photo round">
+					<img src="images/avatar-10.jpeg"/>
+				</div>
+				<div class="photo round">
+					<img src="images/avatar-11.jpeg"/>
 				</div>
 			</div>
 		</div>

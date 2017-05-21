@@ -1,10 +1,14 @@
+* {
+	font-weight:300;
+}
 html {
 	height:100%;
 }
 
 body {
 	height:100%;
-	background-color: rgba(235,242,248,1)
+	background-color: rgba(235,242,248,1);
+	margin:0;
 }
 
 h2 {
@@ -12,9 +16,18 @@ h2 {
 	color:#fff;
 }
 
+p {
+	text-indent: 2em;
+	line-height: 25px;
+}
+
+h1 {
+	font-weight:300;
+}
+
 .header {
 	padding:0.2% 5%;
-	background-image: url("../images/display-header-background.jpg");
+	background-image: url("../images/display-header-background-1.jpg");
 	height:300px;
 	background-size:100% auto;
 	background-position:0 60%;
@@ -22,7 +35,7 @@ h2 {
 	text-align:center;
 }
 
-.avator {
+.avatar {
 	margin:25px auto auto auto;
 	overflow:hidden;
 }
@@ -37,7 +50,7 @@ h2 {
 	height:110%;
 }
 
-.avator .image {
+.avatar .image {
 	position:relative;
 	right:4px;
 	bottom:2px;
@@ -56,14 +69,14 @@ h2 {
 .number {
 	padding:0 8%;
 	border-style:solid;
-	border-width:2px 0 0 0;
+	border-width:1.5px 0 0 0;
 	border-color:#fff;
 	width:100%;
 }
 
 .center {
 	border-style:solid;
-	border-width:2px 2px 0 2px;
+	border-width:1.5px 1.5px 0 1.5px;
 	border-color:#fff;
 }
 
@@ -76,7 +89,7 @@ h2 {
 .left, .right {
 	height:50px;
 	width:50px;
-	background-color:#6cb075;
+	background-color:rgba(159,223,250,1);
 	line-height:50px;
 	margin:0 5%;
 }
@@ -97,12 +110,11 @@ h2 {
 
 .card {
 	display:inline-flex;
-	border:solid;
-	margin:2px 3px;
-	border-color:lightgrey;
-	border-width:1px;
 	width:100%;
 	background-color: #fff;
+	box-sizing: border-box;
+	margin:17.5px auto;
+	text-align: center;
 }
 
 .where {
@@ -132,18 +144,160 @@ h2 {
 .relation {
 	width:27.5%;
 	margin:0;
+	box-sizing:border-box;
+	padding:0 0 0 35px;
 }
 
 .person {
 	width:27.5%;
 	margin:0;
-}
+	box-sizing: border-box;
+	padding:0 35px 0 0;
+}	
 
- .column, .personal {
- 	width:50%;
+ .personal {
+ 	width:60%;
+ 	text-align: left;
+ 	line-height:35px;
  }
 
 .information {
 	width:100%;
 	margin:auto;
+}
+
+.title {
+	font-size: 20px;
+	color:grey;
+	border:solid;
+	border-width: 0 0 4px 0;
+	border-color: lightgrey;
+}
+
+.photo {
+	border-radius: 25px;
+	overflow: hidden;
+	height:55px;
+	width: 55px;
+	margin:auto 10px auto 3px;
+}
+
+.stranger {
+	display:inline-flex;
+	flex-direction: column;
+}
+
+.minicard {
+	display: inline-flex;
+	flex-direction: row;
+	margin:4px 4px;
+}
+
+.unknown {
+	text-align: left;
+	padding:0 0 0 40px;
+}
+
+.name, .recommendation {
+	line-height:27.5px;
+}
+
+
+.friend.card {
+	display: block;
+	background-color: white;
+	height:130px;
+}
+
+.round {
+	margin:6.5px;
+	border-radius:80px;
+	float:left;
+}
+
+.blog .card {
+	padding:0 10px;
+}
+
+.context {
+	text-align: left;
+}
+
+.logo {
+	border-radius:50px;
+	height: 70px;
+	width:70px;
+	font-size: 35px;
+	background-color: rgba(159,223,250,1);
+	color: white;
+	line-height:70px;
+	box-sizing: border-box;
+}
+
+.personal, .logo {
+	margin:10px;
+}
+
+.education .logo {
+	padding:0 0 2.5% 0;
+}
+
+.navigator .left {
+	width:70%;
+	position:relative;
+	margin:0;
+	padding:0 0 0 250px;
+	background-color: #fff;
+}
+
+.navigator .right {
+	width:30%;
+	padding:0 0 0 150px;
+	margin:0;
+	background-color: #fff;
+	display: flex;
+}
+
+.navigator .input{
+	height:90%;
+	border:0;
+	outline:0;
+	margin-left:1%;
+	width:50%;
+}
+
+.navigator .input::placeholder{
+	color:rgba(191,191,191,.87);
+}
+
+.navigator .input:focus::placeholder{
+	color:rgba(0,0,0,.6);
+}
+
+.grey{
+	color:rgba(180,180,180,1);
+}
+
+.navigator {
+	display: flex;
+	width:100%;
+	background-color: #fff;
+	height:55px;
+}
+
+.box {
+	background-color:rgba(159,223,250,1);
+	color:#fff;
+	width:30px;
+	height:30px;
+	line-height:30px;
+	border-radius:100px;
+	margin:auto 0;
+	text-align: center;
+}
+
+.navigator .photo {
+	width:50px;
+	height:50px;
+	margin:2px auto auto 15px;
 }
