@@ -12,22 +12,6 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="controller"/>
-    <context:component-scan base-package="dao"/>
-    <context:component-scan base-package="service"/>
-    <mvc:annotation-driven/>
-    <mvc:resources location="/css/" mapping="/blog/css/**"/>
-    <mvc:resources location="/images/" mapping="/blog/images/**"/>
-    <mvc:resources location="/script/" mapping="/blog/script/**"/>
-    <mvc:default-servlet-handler/>
-    
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
-    
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    	<property name="prefix" value="/"/>
-    	<property name="suffix" value=".jsp"/>
-    </bean>
-
     <bean id="userController" class="controller.UserController">
         <property name="userService" ref="userService"/>
     </bean>
@@ -67,7 +51,7 @@
        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
        <property name="url" value="jdbc:mysql://localhost:3306/blog?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"></property>
        <property name="username" value="root"></property>
-       <property name="password" value="1009"></property>
+       <property name="password" value="gz.19960828"></property>
        <property name="defaultAutoCommit" value="true"></property>
     </bean>
     

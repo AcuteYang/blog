@@ -1,11 +1,11 @@
 package utility;
 
 public enum StatusCode {
-	PENDING(0),
-	READ(1),
-	ACCEPTED(2),
-	DECLINED(3),
-	UNREAD(4);
+	PENDING(1),
+	READ(2),
+	ACCEPTED(3),
+	DECLINED(4),
+	UNREAD(5);
 	
 	private int value;
 	
