@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.userMapper">
+  <resultMap id="detailedUser" type="User">
+  	<id property="userId" column="user_id"/>
+  	<result property="name" column="name"/>
+  	<result property="gender" column="gender"/>
+  	<result property="email" column="email"/>
+  	<result property="password" column="password"/>
+  	<result property="birthday" column="birthday"/>
+  	<association property="currentLocation" column="current_location" javaType="Location">
+  		<id property="locationId" column="location_id"/>
+  		<result property="country" column="country"/>
+  		<result property="state" column="state"/>
+  		<result property="city" column="city"/>
+  	</association>
+  </resultMap>
+  
+  <resultMap id="friend" type="User" extends="detailedUser">
+  	<collection property="friend" ofType="User" resultMap="detailedUser" columnPrefix="friend_"/>
+  </resultMap>
+  <select id="selectUser" resultMap="detailedUser">
+    select * from user
+  </select>
+  
+  <insert id="insertUser">
+  	insert into user(user_id,name,gender,email,password,birthday,birthplace,current_location,page_template_id) 
+  	values(#{userId},#{name},#{gender},#{email},#{password},#{birthday},#{Location.locationId},#{Location.locationId},#{Template.templateId})
+  </insert>
+  <select id="selectUserById" resultMap="detailedUser" parameterType="int">
+  	select * from user where user_id=#{userId}
+  </select>
+  <select id="selectUserByEmail" resultMap="detailedUser" parameterType="String">
+  	select * 
+  	from user join location 
+  	on user.current_location = location.location_id 
+  	where email=#{email}
+  </select>
+  <delete id="deleteUser">
+  	delete from user where user_id=#{userId}
+  </delete>
+  <update id="updateUser">
+  	update user set
+  		user_id=#{userId},
+  		name=#{name},
+  		gender=#{gender},
+  		email=#{email},
+  		password=#{password},
+  		birthday=#{birthday},
+  		birthplace=#{Location.locationId},
+  		current_location=#{Location.locationId},
+  		page_template_id=#{Template.templateId}
+  	where user_id=#{userId}
+  </update>
+  <select id="selectUserByName" resultMap="detailedUser" parameterType="String">
+  	select * from user where name=#{name} order by user_id
+  </select>
+  <select id="selectUserByLocation" resultMap="detailedUser">
+  	select * from user join location on user.current_location=location.loctiaon_id 
+  	where location.country=#{Location.country} and location.state=#{Location.state} and location.city=#{Location.city}
+  	order by user.user_id
+  </select>
+  <select id="showUserByDistinctLocation" resultMap="detailedUser">
+  	select * from user join location on user.current_location=location.location_id
+  	group by location.location_id
+  </select>
+  <select id="showGraduates" resultMap="detailedUser">
+  	select * from user join user_education on user.user_id=user_education.user_id 
+  	join education on user_education.education_id=education.education_id
+  	where education.degree ="master" or education.degree="doctor"
+  	order by user.name
+  </select>
+  <select id="selectUserByAge" resultMap="detailedUser">
+  
+  </select>
+  <select id="showProlificUser" resultType="map">
+  	select user.user_id, user.name, count(blog.blog_id) 
+  	from user join blog on user.user_id=blog.user_id
+  	group by user.user_id
+  	order by user.name
+   </select>
+   <select id="showTopTenActiveUsers" resultType="map">
+   	select active.name, active.user_id
+   	from (select user.user_id, user.name, blog.read_times, blog.blog_id 
+   	from user join blog on user.user_id=blog.user_id 
+   	where (now()-blog.created_time) >= 10 group by user.user_id as active)
+   	order by sum(active.read_times)
+   	limit 10 
+   </select>
+   
+   <select id="getPassword" resultType="String" parameterType="String">
+   	select password from user where email=#{email}
+   </select>
+   
+   <insert id="insertNewUser" parameterType="Map">
+   	insert into user(name,email,password,birthday,gender,current_location)
+   	values(#{name},#{email},#{password},#{birthday},#{gender},#{locationId})	
+   </insert>
+   
+   <select id="selectFriend" parameterType="Integer" resultMap="detailedUser">
+   	select user.user_id as user_id, name, email, birthday, gender, 
+   	location_id, country, state, city
+   	from user join friend on user.user_id=friend.friend_id 
+   	join location on location.location_id=user.current_location
+   	where friend.user_id=#{userId}
+   </select>
+   
+   <select id="selectStranger" parameterType="Integer" resultMap="detailedUser">   	
+   	select user.user_id as user_id, name, email, birthday, gender,
+   	location_id, country, state, city
+   	from user join location on location.location_id=user.current_location
+   	where user.user_id not in
+   	(select friend.friend_id from friend where friend.user_id=#{userId}) 
+   	and user.user_id&lt;&gt;#{userId}
+   </select>
+   
+   
+</mapper>
