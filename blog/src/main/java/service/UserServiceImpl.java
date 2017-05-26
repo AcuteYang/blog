@@ -11,18 +11,30 @@ import dao.LocationDao;
 import dao.LocationDaoImpl;
 import dao.RequestDao;
 import dao.RequestDaoImpl;
+import dao.StatusDao;
 import dao.UserDao;
 import entity.Location;
 import entity.Request;
+import entity.Status;
 import entity.User;
 import utility.ServiceStatus;
+import utility.StatusCode;
 
 @Service
 public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 	private LocationDao locationDao;
 	private RequestDao requestDao;
+	private StatusDao statusDao;
 	
+	public StatusDao getStatusDao() {
+		return statusDao;
+	}
+
+	public void setStatusDao(StatusDao statusDao) {
+		this.statusDao = statusDao;
+	}
+
 	public UserDao getUserDao() {
 		return userDao;
 	}
@@ -103,21 +115,32 @@ public class UserServiceImpl implements UserService {
 		return serviceStatus;
 	}
 	
-	public ServiceStatus sendRequst(Request request) {
+	public ServiceStatus sendRequst(int senderId, int receiverId) {
+		Request request=new Request();
+		User receiver=userDao.getUserById(receiverId);
+		request.setReceiver(receiver);
+		User sender=userDao.getUserById(senderId);
+		request.setSender(sender);
+		Status status=statusDao.getStatus(StatusCode.PENDING.toValue());
+		request.setRequestStatus(status);
 		requestDao.insertNewRequest(request);
 		ServiceStatus serviceStatus=new ServiceStatus(); 
 		serviceStatus.setStatusCode(0);
 		serviceStatus.setStatusMessage("request sent successfully");
-		return null;
+		return serviceStatus;
 	}
 	
-	public ServiceStatus dealRequest(int senderId, int receiverId) {
+	public ServiceStatus dealRequest(int senderId, int receiverId, int requestStatus) {
 		Request request=new Request();
-		User rec1=userDao.
+		User receiver=userDao.getUserById(receiverId);
 		request.setReceiver(receiver);
+		User sender=userDao.getUserById(senderId);
+		request.setSender(sender);
+		Status status=statusDao.getStatus(requestStatus);
+		request.setRequestStatus(status);
 		requestDao.updateRequestStatus(request);
 		ServiceStatus serviceStatus=new ServiceStatus();
-		if(request.getRequestStatus().getStatusId()==3){
+		if(requestStatus==StatusCode.ACCEPTED.toValue()){
 			serviceStatus.setStatusCode(0);
 			serviceStatus.setStatusMessage("request accepted");
 		}else{
