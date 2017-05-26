@@ -104,13 +104,27 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	public ServiceStatus sendRequst(Request request) {
-		// TODO Auto-generated method stub
+		requestDao.insertNewRequest(request);
+		ServiceStatus serviceStatus=new ServiceStatus(); 
+		serviceStatus.setStatusCode(0);
+		serviceStatus.setStatusMessage("request sent successfully");
 		return null;
 	}
 	
-	public ServiceStatus dealRequest(Request request) {
-		// TODO Auto-generated method stub
-		return null;
+	public ServiceStatus dealRequest(int senderId, int receiverId) {
+		Request request=new Request();
+		User rec1=userDao.
+		request.setReceiver(receiver);
+		requestDao.updateRequestStatus(request);
+		ServiceStatus serviceStatus=new ServiceStatus();
+		if(request.getRequestStatus().getStatusId()==3){
+			serviceStatus.setStatusCode(0);
+			serviceStatus.setStatusMessage("request accepted");
+		}else{
+			serviceStatus.setStatusCode(-1);
+			serviceStatus.setStatusMessage("request declined");
+		}
+		return serviceStatus;
 	}
 	
 	public User userDisplay(String email) {

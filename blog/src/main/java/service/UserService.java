@@ -14,7 +14,7 @@ public interface UserService {
 			String passwordConfirmed, String birthday, String gender,
 			String country, String state, String city);
 	
-	ServiceStatus sendRequst(Request request);
+	ServiceStatus sendRequst(int senderId, int receiverId);
 	
 	ServiceStatus dealRequest(Request request);
 	

@@ -53,4 +53,9 @@ public class UserDaoImpl implements UserDao {
 		List<User> stranger=sqlSession.selectList("mapper.userMapper.selectStranger", userId);
 		return stranger;
 	}
+
+	public User getUserById(Integer userId) {
+		User user=sqlSession.selectOne("mapper.userMapper.selectUserById",userId);
+		return user;
+	}
 }
