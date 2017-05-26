@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import dao.UserDao;
 import dao.UserDaoImpl;
@@ -49,12 +50,7 @@ public class UserController {
 	
 	@RequestMapping(value="/display")
 	public String userDisplay(@RequestParam String email, Model model){
-		User user=userService.userDisplay(email);
-		List<User> stranger=userService.getStranger(email);
-		List<Request> request=userService.getRequestBySenderId(email);
-		model.addAttribute("user",user);
-		model.addAttribute("stranger", stranger);
-		model.addAttribute("request",request);
+		
 		
 		return "display";
 	}
@@ -65,7 +61,7 @@ public class UserController {
 		return "friend";
 	}
 	
-	@RequestMapping(value="/register")
+	@RequestMapping(value="/register",method=RequestMethod.GET)
 	public String passwordConfirmed(@RequestParam String name, 
 			@RequestParam String email, @RequestParam String password,
 			@RequestParam String passwordConfirmed, @RequestParam String birthday, 
