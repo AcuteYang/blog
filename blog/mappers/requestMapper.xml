@@ -15,7 +15,7 @@
   </resultMap>
   
   <insert id="insertNewRequest" parameterType="Request">
-  	insert into request(sender_id,request_id,request_status) 
+  	insert into request(sender_id,receiver_id,request_status) 
   	values(#{sender.userId},#{receiver.userId},#{requestStatus.statusId})
   </insert>
   
