@@ -31,6 +31,11 @@ public class RequestDaoImpl implements RequestDao {
 		return request;
 	}
 
+	public Request getLatestRequest() {
+		Request request = sqlSession.selectOne("mapper.requestMapper.getLatestRequest");
+		return request;
+	}
+
 	
 
 }

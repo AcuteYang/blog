@@ -10,4 +10,6 @@ public interface RequestDao {
 	public void updateRequestStatus(Request request);
 	
 	public List<Request> getRequestListBySenderId(Integer senderId);
+	
+	public Request getLatestRequest();
 }

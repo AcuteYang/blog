@@ -7,11 +7,11 @@
   <resultMap id="detailedRequest" type="Request">
   	<id property="requestId" column="request_id"/>
   	<association property="sender" column="sender_id" resultMap="mapper.userMapper.detailedUser" columnPrefix="sender_"/>
-	<association property="receiver" column="receiver_id" resultMap="mapper.userMapper.detailedUser" columnPrefix="receiver_"/>
-	<association property="requestStatus" column="request_status" javaType="Status">
-		<id property="statusId" column="status_id"/>
-		<result property="statusType" column="status_type"/>
-	</association>
+		<association property="receiver" column="receiver_id" resultMap="mapper.userMapper.detailedUser" columnPrefix="receiver_"/>
+		<association property="requestStatus" column="request_status" javaType="Status">
+			<id property="statusId" column="status_id"/>
+			<result property="statusType" column="status_type"/>
+		</association>
   </resultMap>
   
   <insert id="insertNewRequest" parameterType="Request">
@@ -32,6 +32,33 @@
   	join user as R on request.receiver_id=R.user_id
   	join status on request.request_status=status.status_id 
   	where sender_id=#{senderId}
+  </select>
+  
+  <select id="getLatestRequest" resultMap="detailedRequest">
+  	select request_id, 
+  	S.user_id as sender_user_id, 
+  	S.name as sender_name,
+  	S.email as sender_email,
+  	S.password as sender_password,
+  	S.gender as sender_gender,
+  	S.birthday as sender_birthday,
+  	S.birthplace as sender_birthplace,
+  	S.current_location as sender_current_location,
+  	T.user_id as receiver_user_id, 
+  	T.name as receiver_name,
+  	T.email as receiver_email,
+  	T.password as receiver_password,
+  	T.gender as receiver_gender,
+  	T.birthday as receiver_birthday,
+  	T.birthplace as receiver_birthplace,
+  	T.current_location as receiver_current_location,
+  	status_id,
+  	status_type
+  	from request
+  	join user as S on request.sender_id=S.user_id
+  	join user as T on request.receiver_id=T.user_id
+  	join status on request.request_status=status.status_id
+  	order by request_id desc limit 1
   </select>
   
   </mapper>
