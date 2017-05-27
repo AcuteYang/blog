@@ -20,6 +20,7 @@
         <property name="userDao" ref="userDao"/>
         <property name="locationDao" ref="locationDao"/>
         <property name="requestDao" ref="requestDao"/>
+        <property name="statusDao" ref="statusDao"/>
     </bean>
 
     <bean id="userDao" class="dao.UserDaoImpl">

@@ -115,21 +115,6 @@ public class UserServiceImpl implements UserService {
 		return serviceStatus;
 	}
 	
-	public ServiceStatus sendRequst(int senderId, int receiverId) {
-		Request request=new Request();
-		User receiver=userDao.getUserById(receiverId);
-		request.setReceiver(receiver);
-		User sender=userDao.getUserById(senderId);
-		request.setSender(sender);
-		Status status=statusDao.getStatus(StatusCode.PENDING.toValue());
-		request.setRequestStatus(status);
-		requestDao.insertNewRequest(request);
-		ServiceStatus serviceStatus=new ServiceStatus(); 
-		serviceStatus.setStatusCode(0);
-		serviceStatus.setStatusMessage("request sent successfully");
-		return serviceStatus;
-	}
-	
 	public ServiceStatus dealRequest(int senderId, int receiverId, int requestStatus) {
 		Request request=new Request();
 		User receiver=userDao.getUserById(receiverId);
@@ -167,6 +152,21 @@ public class UserServiceImpl implements UserService {
 		User user=userDao.getUserByEmail(email);
 		List<Request> request=requestDao.getRequestListBySenderId(user.getUserId());
 		return request;
+	}
+
+	public ServiceStatus sendRequest(int senderId, int receiverId) {
+		Request request=new Request();
+		User receiver=userDao.getUserById(receiverId);
+		request.setReceiver(receiver);
+		User sender=userDao.getUserById(senderId);
+		request.setSender(sender);
+		Status status=statusDao.getStatus(StatusCode.PENDING.toValue());
+		request.setRequestStatus(status);
+		requestDao.insertNewRequest(request);
+		ServiceStatus serviceStatus=new ServiceStatus(); 
+		serviceStatus.setStatusCode(0);
+		serviceStatus.setStatusMessage("request sent successfully");
+		return serviceStatus;
 	}
 
 }

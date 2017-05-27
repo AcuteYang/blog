@@ -45,7 +45,7 @@ public class UserController {
 		model.addAttribute("message", status.getStatusMessage());
 		model.addAttribute("email",email);
 		
-		return "redirect:/user/display";
+		return "redirect:/user/friend";
 	}
 	
 	@RequestMapping(value="/display")
@@ -59,6 +59,26 @@ public class UserController {
 	public String friendDisplay(@RequestParam Model model){
 		
 		return "friend";
+	}
+	@RequestMapping(value="/request")
+	public String sendReqeust(){
+		return "sendRequest";
+	}
+	
+	@RequestMapping(value="/sendRequest")
+	public String sendReqeust(@RequestParam int senderId, 
+			@RequestParam int receiverId){
+		ServiceStatus status=userService.sendRequest(senderId, receiverId);
+		
+		return "sendRequest";
+	}
+	
+	@RequestMapping(value="/dealRequest")
+	public String dealRequest(@RequestParam int senderId,
+			@RequestParam int receiverId, @RequestParam int requestStatus){
+		ServiceStatus status=userService.dealRequest(senderId, receiverId, requestStatus);
+		
+		return "dealRequest";
 	}
 	
 	@RequestMapping(value="/register",method=RequestMethod.GET)
@@ -77,5 +97,6 @@ public class UserController {
 			return "register";
 		}
 	}
+
 	
 }
