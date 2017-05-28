@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import dao.UserDao;
 import dao.UserDaoImpl;
 import entity.Request;
@@ -66,11 +68,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/sendRequest")
+	@ResponseBody
 	public String sendReqeust(@RequestParam int senderId, 
 			@RequestParam int receiverId){
 		ServiceStatus status=userService.sendRequest(senderId, receiverId);
 		
-		return "sendRequest";
+		return "success";
 	}
 	
 	@RequestMapping(value="/dealRequest")

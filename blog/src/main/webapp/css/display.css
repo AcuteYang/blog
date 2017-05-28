@@ -195,7 +195,9 @@ h1 {
 
 .unknown {
 	text-align: left;
-	padding:0 0 0 40px;
+	padding:0 0 0 15px;
+	font-size:15px;
+	width:50%;
 }
 
 .name, .recommendation {
@@ -300,4 +302,18 @@ h1 {
 	width:50px;
 	height:50px;
 	margin:2px auto auto 15px;
+}
+
+.minicard .logo {
+	float:right;
+	line-height:30px;
+	height:30px;
+	width:30px;
+	font-size:15px;
+	padding:0.5% 0 0 0;
+	margin:auto 0;
+}
+
+.minicard .logo:hover{
+	cursor: pointer;
 }
