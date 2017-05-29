@@ -6,7 +6,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Display Information</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="css/display.css">
+	<link rel="stylesheet" type="text/css" href="/blog/css/display.css">
+	<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/blog/script/vue.js"></script>
 </head>
 <body>
 	<div class="navigator">
@@ -17,13 +19,13 @@
 		<div class="right">
 			<div class="box">3</div>
 			<div>
-				<img class="photo" src="images/navigator-avatar.jpeg"/>
+				<img class="photo" src="/blog/images/navigator-avatar.jpeg"/>
 			</div>
 		</div>
 	</div>
 	<div class="header">
 		<div class="avatar radius">
-			<img class="small image" src="images/display-avatar-image.jpg"/>
+			<img class="small image" src="/blog/images/display-avatar-image.jpg"/>
 		</div>
 		<div class="name">
 			<h2>Aaron Guo
@@ -92,94 +94,78 @@
 			<div class="stranger card">
 				<div class="minicard">
 					<div class="photo">
-						<img class="photo" src="images/avatar-1.jpg"/>
+						<img class="photo" src="/blog/images/avatar-1.jpg"/>
 					</div>
 					<div class="unknown">
 						<div class="name">Trewlove</div>
 						<div class="recommendation">China</div>
-					</div>				
+					</div>
+				   <div class="logo request">
+				       <input id="senderId" name="senderId" type="hidden" v-model="senderId"/>
+				       <input id="receiverId" name="receiverId" type="hidden" v-model="receiverId"/>
+				       <i class="fa fa-plus"></i>
+				       <button v-on:click="sendRequest" style="display:none;"></button>
+				   </div>				
 				</div>
 				<div class="minicard">
 					<div class="photo">
-						<img class="photo" src="images/avatar-2.jpg"/>
+						<img class="photo" src="/blog/images/avatar-2.jpg"/>
 					</div>
 					<div class="unknown">
 						<div class="name">Jakes</div>
 						<div class="recommendation">China</div>
 					</div>
+					<div class="logo request">
+                       <input id="senderId" name="senderId" type="hidden" v-model="senderId"/>
+                       <input id="receiverId" name="receiverId" type="hidden" v-model="receiverId"/>
+                       <i class="fa fa-plus"></i>
+                       <button v-on:click="sendRequest" style="display:none;"></button>
+                   </div>
 				</div>	
 				<div class="minicard">
 					<div class="photo">
-						<img class="photo" src="images/avatar-3.jpg"/>
+						<img class="photo" src="/blog/images/avatar-3.jpg"/>
 					</div>
 					<div class="unknown">
 						<div class="name">Strange</div>
 						<div class="recommendation">Computer Science</div>
 					</div>
+					<div class="logo request">
+                       <input id="senderId" name="senderId" type="hidden" v-model="senderId"/>
+                       <input id="receiverId" name="receiverId" type="hidden" v-model="receiverId"/>
+                       <i class="fa fa-plus"></i>
+                       <button v-on:click="sendRequest" style="display:none;"></button>
+                   </div>
 				</div>									
 			</div>
 			<div class="title">Friend</div>
 			<div class="friend card">
 				<div class="photo round">
-					<img src="images/avatar-4.jpg"/>
+					<img src="/blog/images/avatar-4.jpg"/>
 				</div>
 				<div class="photo round">
-					<img src="images/avatar-5.jpg"/>
+					<img src="/blog/images/avatar-5.jpg"/>
 				</div>
 				<div class="photo round">
-					<img src="images/avatar-6.jpg"/>
+					<img src="/blog/images/avatar-6.jpg"/>
 				</div>
 				<div class="photo round">
-					<img src="images/avatar-7.jpg"/>
+					<img src="/blog/images/avatar-7.jpg"/>
 				</div>
 				<div class="photo round">
-					<img src="images/avatar-8.jpg"/>
+					<img src="/blog/images/avatar-8.jpg"/>
 				</div>
 				<div class="photo round">
-					<img src="images/avatar-9.jpg"/>
+					<img src="/blog/images/avatar-9.jpg"/>
 				</div>
 				<div class="photo round">
-					<img src="images/avatar-10.jpeg"/>
+					<img src="/blog/images/avatar-10.jpeg"/>
 				</div>
 				<div class="photo round">
-					<img src="images/avatar-11.jpeg"/>
+					<img src="/blog/images/avatar-11.jpeg"/>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!--<table>
-		<tr><th>Name</th><th>Birthday</th><th>Gender</th><th>Country</th><th>State</th><th>City</th></tr>
-		<c:forEach var="item" items="${user.getFriend()}">
-			<tr><td>${item.getName()}</td>
-			<td>${item.getBirthday()}</td>
-			<td>${item.getGender()}</td>
-			<td>${item.getCurrentLocation().getCountry()}</td>
-			<td>${item.getCurrentLocation().getState()}</td>
-			<td>${item.getCurrentLocation().getCity()}</td></tr>
-		</c:forEach>
-	</table>
-	<table>
-		<tr><th>Name</th><th>Birthday</th><th>Gender</th><th>Country</th><th>State</th><th>City</th><th>Request</th></tr>
-		<c:forEach var="s" items="${stranger}">
-			<tr><td>${s.getName()}</td>
-			<td>${s.getBirthday()}</td>
-			<td>${s.getGender()}</td>
-			<td>${s.getCurrentLocation().getCountry()}</td>
-			<td>${s.getCurrentLocation().getState()}</td>
-			<td>${s.getCurrentLocation().getCity()}</td></tr>
-			<td><form action="/blog/user/friend">
-			<input name="userId" type="hidden" value="${user.getUserId()}"/>
-			<input name="strangerId" type="hidden" value="${s.getUserId()}"/>
-			<input name="send" type="submit" value="Send"/></form></td>
-		</c:forEach>
-	</table>
-	<table>
-		<tr><th>Sender</th><th>Receiver</th><th>Status</th></tr>
-		<c:forEach var="req" items="${request}">
-			<tr><td>${req.getSender().getName()}</td>
-			<td>${req.getReceiver().getName()}</td>
-			<td>${req.getRequestStatus().getStatusType()}</td></tr>
-		</c:forEach>
-	</table>-->
 </body>
 </html>

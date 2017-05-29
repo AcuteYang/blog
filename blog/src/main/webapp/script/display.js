@@ -1,0 +1,33 @@
+/**
+ * 
+ */
+var request=new Vue({
+    	el:"#request",
+        data:{
+        	senderId:"8",
+        	receiverId:"12",
+        	sendStatus:"wait"
+        },
+        methods:{
+        	sendRequest:function(){
+        		var d={
+        		        "senderId":parseInt(this.senderId),
+        		        "receiverId":parseInt(this.receiverId)
+    		    }
+     		    $.ajax({
+     		        url:"/blog/user/sendRequest",
+     		        data:d,
+     		        type:"GET",
+     		        dataType:"text",
+     		        success:function(rep){
+     		            //request.sendStatus=rep
+     		        	alert(rep)
+     		        },
+     		        error:function(){
+     		            //request.sendStatus="error"
+     		        	alert("error")
+     		        }
+     		    })
+        	}
+        }
+    })
