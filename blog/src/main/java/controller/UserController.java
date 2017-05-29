@@ -1,6 +1,9 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,9 +55,22 @@ public class UserController {
 	
 	@RequestMapping(value="/display")
 	public String userDisplay(@RequestParam String email, Model model){
-		
-		
+		List<String> test=new ArrayList<String>();
+		test.add("1");
+		test.add("2");
+		test.add("3");
+		User user = new User();
+		user.setEmail("email");
+		JSONObject jo = new JSONObject();
+		jo.append("user", user);
+		System.out.println(jo.toString());
 		return "display";
+	}
+	
+	@RequestMapping(value="/getStranger")
+	@ResponseBody
+	public List<User> getStranger() {
+		return userService.getStranger("sanchez38@sina.com");
 	}
 	
 	@RequestMapping(value="/friend")
@@ -69,11 +85,14 @@ public class UserController {
 	
 	@RequestMapping(value="/sendRequest")
 	@ResponseBody
-	public String sendReqeust(@RequestParam int senderId, 
+	public List<User> sendReqeust(@RequestParam int senderId, 
 			@RequestParam int receiverId){
 		ServiceStatus status=userService.sendRequest(senderId, receiverId);
 		
-		return "success";
+		User user = new User();
+		user.setEmail("aaronguo@outlook.com");
+		user.setPassword("123456");
+		return userService.getStranger("sanchez38@sina.com");
 	}
 	
 	@RequestMapping(value="/dealRequest")
