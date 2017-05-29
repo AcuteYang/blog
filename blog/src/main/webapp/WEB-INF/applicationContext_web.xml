@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
         
-		<context:component-scan base-package="controller"/>
+	<context:component-scan base-package="controller"/>
     <context:component-scan base-package="dao"/>
     <context:component-scan base-package="service"/>
     <mvc:annotation-driven/>
@@ -26,52 +26,5 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     	<property name="prefix" value="/"/>
     	<property name="suffix" value=".jsp"/>
-    </bean>
-    
-    <bean id="userController" class="controller.UserController">
-        <property name="userService" ref="userService"/>
-    </bean>
-    
-		<bean id="userService" class="service.UserServiceImpl">
-        <property name="userDao" ref="userDao"/>
-        <property name="locationDao" ref="locationDao"/>
-        <property name="requestDao" ref="requestDao"/>
-    </bean>
-
-    <bean id="userDao" class="dao.UserDaoImpl">
-    	<property name="sqlSession" ref="sqlSession"/>
-    </bean>
-    <bean id="locationDao" class="dao.LocationDaoImpl">
-    	<property name="sqlSession" ref="sqlSession"/>
-    </bean>
-    <bean id="requestDao" class="dao.RequestDaoImpl">
-    	<property name="sqlSession" ref="sqlSession"/>
-    </bean>
-    <bean id="statusDao" class="dao.StatusDaoImpl">
-    	<property name="sqlSession" ref="sqlSession"/>
-    </bean>
-    <bean id="blogDao" class="dao.BlogDaoImpl">
-    	<property name="sqlSession" ref="sqlSession"/>
-    </bean>
-    
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		  <constructor-arg index="0" ref="sqlSessionFactory" />
-		</bean>
-    
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" scope="singleton">
-    	<property name="configLocation" value="classpath:mybatis-config.xml"/>
-      <property name="dataSource" ref="dataSource" />
-    </bean>
-    
-    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-       <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-       <property name="url" value="jdbc:mysql://localhost:3306/blog?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"></property>
-       <property name="username" value="root"></property>
-       <property name="password" value="gz.19960828"></property>
-       <property name="defaultAutoCommit" value="true"></property>
-    </bean>
-    
-    <bean id="request" class="entity.Request">
-    	<property name="statusDao" ref="statusDao"/>
     </bean>
 </beans>

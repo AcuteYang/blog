@@ -19,34 +19,39 @@
     </div>
 
 <script>
-    var request=new Vue({
-    	el:"#request",
-        data:{
-        	senderId:"",
-        	receiverId:"",
-        	sendStatus:"wait"
-        },
-        methods:{
-        	sendRequest:function(){
-        		var d={
-        		        "senderId":parseInt(this.senderId),
-        		        "receiverId":parseInt(this.receiverId)
-    		    }
-     		    $.ajax({
-     		        url:"/blog/user/sendRequest",
-     		        data:d,
-     		        type:"GET",
-     		        dataType:"text",
-     		        success:function(rep){
-     		            request.sendStatus=rep
-     		        },
-     		        error:function(){
-     		            request.sendStatus="error"
-     		        }
-     		    })
-        	}
+var request=new Vue({
+    el:"#request",
+    data:{
+        senderId:"",
+        receiverId:"",
+        sendStatus:"wait",
+        resObj:null
+    },
+    methods:{
+        sendRequest:function(){
+            
+            
         }
-    })
+    }
+})
+var d={
+    "senderId":4,
+    "receiverId":8
+}
+
+$.ajax({
+    url:"/blog/user/sendRequest",
+    data:d,
+    type:"GET",
+    dataType:"json",
+    success:function(rep){
+        request.sendStatus=rep;
+    },
+    error:function(){
+        request.sendStatus="error"
+    }
+})
+    
 </script>
 
 </body>

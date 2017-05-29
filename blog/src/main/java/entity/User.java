@@ -76,6 +76,4 @@ public class User {
 	public void setCreatedTime(Timestamp createdTime) {
 		this.createdTime = createdTime;
 	}
-	
-	
 }

@@ -91,52 +91,11 @@
 		</div>
 		<div class="relation">
 			<div class="title">Stranger</div>
-			<div class="stranger card">
-				<div class="minicard">
-					<div class="photo">
-						<img class="photo" src="/blog/images/avatar-1.jpg"/>
-					</div>
-					<div class="unknown">
-						<div class="name">Trewlove</div>
-						<div class="recommendation">China</div>
-					</div>
-				   <div class="logo request">
-				       <input id="senderId" name="senderId" type="hidden" v-model="senderId"/>
-				       <input id="receiverId" name="receiverId" type="hidden" v-model="receiverId"/>
-				       <i class="fa fa-plus"></i>
-				       <button v-on:click="sendRequest" style="display:none;"></button>
-				   </div>				
-				</div>
-				<div class="minicard">
-					<div class="photo">
-						<img class="photo" src="/blog/images/avatar-2.jpg"/>
-					</div>
-					<div class="unknown">
-						<div class="name">Jakes</div>
-						<div class="recommendation">China</div>
-					</div>
-					<div class="logo request">
-                       <input id="senderId" name="senderId" type="hidden" v-model="senderId"/>
-                       <input id="receiverId" name="receiverId" type="hidden" v-model="receiverId"/>
-                       <i class="fa fa-plus"></i>
-                       <button v-on:click="sendRequest" style="display:none;"></button>
-                   </div>
-				</div>	
-				<div class="minicard">
-					<div class="photo">
-						<img class="photo" src="/blog/images/avatar-3.jpg"/>
-					</div>
-					<div class="unknown">
-						<div class="name">Strange</div>
-						<div class="recommendation">Computer Science</div>
-					</div>
-					<div class="logo request">
-                       <input id="senderId" name="senderId" type="hidden" v-model="senderId"/>
-                       <input id="receiverId" name="receiverId" type="hidden" v-model="receiverId"/>
-                       <i class="fa fa-plus"></i>
-                       <button v-on:click="sendRequest" style="display:none;"></button>
-                   </div>
-				</div>									
+			<div id="request" class="stranger card">
+			    <div v-for="stranger in strangerList">
+			        <stranger-info v-bind:name="stranger.name" v-bind:country="stranger.currentLocation.country"></stranger-info>
+			        
+			    </div>
 			</div>
 			<div class="title">Friend</div>
 			<div class="friend card">
@@ -167,5 +126,6 @@
 			</div>
 		</div>
 	</div>
+	<script src="/blog/script/display.js"></script>
 </body>
 </html>
