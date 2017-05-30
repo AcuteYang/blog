@@ -17,10 +17,26 @@
 			<input class="input" type="text" placeholder="Search here"/>
 		</div>
 		<div class="right">
-			<div class="box">3</div>
+			<div class="unread">3</div>
 			<div>
 				<img class="photo" src="/blog/images/navigator-avatar.jpeg"/>
 			</div>
+		</div>
+		<div class="box">
+		    <div class="type">
+				<div class="message">
+				   <i class="fa fa-envelope"></i> 
+				</div>
+				<div class="comment">
+				   <i class="fa fa-comments"></i> 
+				</div>
+				<div class="request">
+				   <i class="fa fa-user-plus"></i> 
+				</div>
+		    </div>
+		    <div class="detail">
+                <div class="line"></div>
+		    </div>
 		</div>
 	</div>
 	<div class="header">
@@ -92,9 +108,8 @@
 		<div class="relation">
 			<div class="title">Stranger</div>
 			<div id="request" class="stranger card">
-			    <div v-for="stranger in strangerList">
+			    <div v-for="(stranger,index) in strangerList" v-if="index>0&&index<4">
 			        <stranger-info v-bind:name="stranger.name" v-bind:country="stranger.currentLocation.country"></stranger-info>
-			        
 			    </div>
 			</div>
 			<div class="title">Friend</div>

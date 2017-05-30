@@ -191,6 +191,7 @@ h1 {
 	display: inline-flex;
 	flex-direction: row;
 	margin:4px 4px;
+    width:250px;
 }
 
 .unknown {
@@ -285,9 +286,10 @@ h1 {
 	width:100%;
 	background-color: #fff;
 	height:55px;
+	position:relative;
 }
 
-.box {
+.unread {
 	background-color:rgba(159,223,250,1);
 	color:#fff;
 	width:30px;
@@ -316,4 +318,10 @@ h1 {
 
 .minicard .logo:hover{
 	cursor: pointer;
+}
+
+.box {
+	border:solid 3px;
+	position:absolute;
+	top:60px;
 }
