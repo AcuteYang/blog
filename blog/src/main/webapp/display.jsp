@@ -22,20 +22,51 @@
 				<img class="photo" src="/blog/images/navigator-avatar.jpeg"/>
 			</div>
 		</div>
-		<div class="box">
+		<div id="box" class="box">
 		    <div class="type">
 				<div class="message">
-				   <i class="fa fa-envelope"></i> 
+				   <i v-bind:class="{chosen:messageChosen}" v-on:click="messageClick" class="fa fa-envelope tag"></i> 
 				</div>
 				<div class="comment">
-				   <i class="fa fa-comments"></i> 
+				   <i v-bind:class="{chosen:commentChosen}" v-on:click="commentClick" class="fa fa-comments tag"></i> 
 				</div>
 				<div class="request">
-				   <i class="fa fa-user-plus"></i> 
+				   <i v-bind:class="{chosen:requestChosen}" v-on:click="requestClick" class="fa fa-user-plus tag"></i> 
 				</div>
 		    </div>
-		    <div class="detail">
-                <div class="line"></div>
+		    <div class="detail" v-bind:class="{visible:messageChosen}">               
+                <div class="line">like that series, is set primarily in Oxford. 
+                     Shaun Evans portrays a young Endeavour Morse beginning</div>
+                 <div class="line">like that series, is set primarily in Oxford. 
+                     Shaun Evans portrays a young Endeavour Morse beginning</div>
+                 <div class="line">Endeavour is a British television detective drama series.
+                 It is a prequel to the long-running Inspector Morse</div>
+                 <div class="line">Endeavour is a British television detective drama series.
+                 It is a prequel to the long-running Inspector Morse</div>
+		    </div>
+		    <div class="detail" v-bind:class="{visible:commentChosen}">               
+                <div class="line">Endeavour is a British television detective drama series.
+                 It is a prequel to the long-running Inspector Morse</div>
+                 <div class="line">Endeavour is a British television detective drama series.
+                 It is a prequel to the long-running Inspector Morse</div>
+                 <div class="line">Endeavour is a British television detective drama series.
+                 It is a prequel to the long-running Inspector Morse</div>
+                 <div class="line">Endeavour is a British television detective drama series.
+                 It is a prequel to the long-running Inspector Morse</div>
+            </div>
+            <div class="detail" v-bind:class="{visible:requestChosen}">               
+                <div class="line"> 
+                    <div>
+                        <img class="photo" src="/blog/images/avatar-7.jpg"/>
+                        </div>
+                        <div class="unknown">
+                        <div class="name">Heart</div>
+                        <div class="recommendation">China</div>
+                    </div>
+                </div>
+            </div>
+		    <div class="more">
+                <div>More</div>
 		    </div>
 		</div>
 	</div>
@@ -101,7 +132,16 @@
 			<div class="card">
 				<div class="context">
 					<h1>Endeavour</h1>
-					<p>Endeavour is a British television detective drama series. It is a prequel to the long-running Inspector Morse and, like that series, is set primarily in Oxford. Shaun Evans portrays a young Endeavour Morse beginning his career as a Detective Constable with the Oxford City Police CID. The series is produced for ITV by Mammoth Screen and Masterpiece co-production for ITV Studios. Following a pilot episode in 2012, the first series was broadcast in 2013, the second in 2014 and the third in January 2016. A fourth series was ordered by ITV, began filming in late spring 2016,[1] and premiered on 8 January 2017.</p>
+					<p>Endeavour is a British television detective drama series.
+					 It is a prequel to the long-running Inspector Morse and, 
+					 like that series, is set primarily in Oxford. 
+					 Shaun Evans portrays a young Endeavour Morse beginning 
+					 his career as a Detective Constable with the Oxford City Police CID. 
+					 The series is produced for ITV by Mammoth Screen and Masterpiece 
+					 co-production for ITV Studios. Following a pilot episode in 2012, 
+					 the first series was broadcast in 2013, the second in 2014 
+					 and the third in January 2016. A fourth series was ordered by ITV, 
+					 began filming in late spring 2016,[1] and premiered on 8 January 2017.</p>
 				</div>
 			</div>
 		</div>
@@ -109,7 +149,8 @@
 			<div class="title">Stranger</div>
 			<div id="request" class="stranger card">
 			    <div v-for="(stranger,index) in strangerList" v-if="index>0&&index<4">
-			        <stranger-info v-bind:name="stranger.name" v-bind:country="stranger.currentLocation.country"></stranger-info>
+			        <stranger-info v-bind:name="stranger.name" v-bind:country="stranger.currentLocation.country" 
+			        v-bind:receiver-id="stranger.userId"></stranger-info>
 			    </div>
 			</div>
 			<div class="title">Friend</div>
