@@ -14,8 +14,6 @@ var request=new Vue({
     					<div class="recommendation">{{country}}</div>\
     					</div>\
     					<div class="logo request">\
-    					<input id="senderId" name="senderId" type="hidden" v-model="senderId"/>\
-    					<input id="receiverId" name="receiverId" type="hidden" v-model="receiverId"/>\
     					<i class="fa fa-plus" v-on:click="sendRequest"></i>\
     					</div>\
     					</div>',
@@ -59,4 +57,31 @@ $.ajax({
     error:function(){
     	alert("error");
     }
+})
+
+var box=new Vue({
+	el:"#box",
+	data:{
+		messageChosen:true,
+		commentChosen:false,
+		requestChosen:false
+	},
+	methods:{
+		messageClick:function(){
+			this.messageChosen=true;
+			this.commentChosen=false;
+			this.requestChosen=false;
+		},
+		commentClick:function(){
+			this.commentChosen=true;
+			this.messageChosen=false;
+			this.requestChosen=false;
+		},
+		requestClick:function(){
+			this.requestChosen=true;
+			this.messageChosen=false;
+			this.commentChosen=false;
+		}
+	}
+
 })
