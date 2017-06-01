@@ -9,7 +9,6 @@ import utility.ServiceStatus;
 public interface UserService {
 	ServiceStatus login(String email, String password);
 	
-	
 	ServiceStatus register(String name, String email, String password,
 			String passwordConfirmed, String birthday, String gender,
 			String country, String state, String city);
@@ -23,4 +22,8 @@ public interface UserService {
 	List<User> getStranger(String email);
 	
 	List<Request> getRequestBySenderId(String email);
+	
+	List<Request> getPendingRequestByReceiverId(String email);
+	
+	List<Request> getRequestByReceiverId(String email);
 }

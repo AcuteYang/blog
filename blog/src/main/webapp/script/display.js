@@ -13,7 +13,7 @@ var request=new Vue({
     					<div class="name">{{name}}</div>\
     					<div class="recommendation">{{country}}</div>\
     					</div>\
-    					<div class="logo request">\
+    					<div class="logo request pointer">\
     					<i class="fa fa-plus" v-on:click="sendRequest"></i>\
     					</div>\
     					</div>',
@@ -59,12 +59,26 @@ $.ajax({
     }
 })
 
-var box=new Vue({
-	el:"#box",
+$.ajax({
+	url:"/blog/user/getPendingRequest",
+	type:"GET",
+	dataType:"json",
+	success:function(rep){
+		navigator.requestList=rep;
+	},
+	error:function(){
+		alert("wrong");
+	}
+})
+
+var navigator=new Vue({
+	el:"#navigator",
 	data:{
 		messageChosen:true,
 		commentChosen:false,
-		requestChosen:false
+		requestChosen:false,
+		boxChosen:false,
+		requestList:[],
 	},
 	methods:{
 		messageClick:function(){
@@ -81,7 +95,43 @@ var box=new Vue({
 			this.requestChosen=true;
 			this.messageChosen=false;
 			this.commentChosen=false;
+		},
+		boxClick:function(){
+			this.boxChosen=!this.boxChosen;
+		}
+	},
+	components:{
+		'pending-request':{
+			template:'<div class="line">\
+						<div>\
+							<img class="photo" src="/blog/images/avatar-4.jpeg"/>\
+						</div>\
+						<div class="unknown">\
+							<div class="name">{{name}}</div>\
+							<div class="recommendation">{{country}}</div>\
+						</div>\
+						<div class="deal">\
+							<div class="pointer logo" v-on:click="dealRequest(3)">\
+								<i class="fa fa-check"></i>\
+							</div>\
+							<div class="pointer logo" v-on:click="dealRequest(4)">\
+								<i class="fa fa-times"></i>\
+							</div>\
+						</div>\
+					</div>',
+			props:['senderId','recieverId','name','country'],
+			methods:{
+				dealRequest(ac){
+					var d={	
+							"senderId":parseInt(this.senderId),
+	        		        "receiverId":parseInt(this.receiverId),
+	        		        "requestStatus":ac
+					}
+					$ajax({
+						url:""
+					})
+				}
+			},
 		}
 	}
-
 })

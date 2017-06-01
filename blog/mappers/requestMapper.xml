@@ -24,14 +24,34 @@
   	where request_id=#{Request.requestId}
   </update>
   
-  <select id="getRequestListBySenderId" parameterType="Integer" resultMap="detailedRequest">
+  <select id="getRequestListByReceiverId" parameterType="Integer" resultMap="detailedRequest">
   	select request_id, S.user_id as sender_user_id, S.name as sender_name,
   	R.user_id as receiver_user_id, R.name as receiver_name, 
   	status_id, status_type
   	from request join user as S on request.sender_id=S.user_id 
   	join user as R on request.receiver_id=R.user_id
   	join status on request.request_status=status.status_id 
-  	where sender_id=#{senderId}
+  	where receiver_id=#{receiverId}
+  </select>
+  
+  <select id="getRequestListBySenderId" parameterType="Integer" resultMap="detailedRequest">
+    select request_id, S.user_id as sender_user_id, S.name as sender_name,
+    R.user_id as receiver_user_id, R.name as receiver_name, 
+    status_id, status_type
+    from request join user as S on request.sender_id=S.user_id 
+    join user as R on request.receiver_id=R.user_id
+    join status on request.request_status=status.status_id 
+    where sender_id=#{senderId}
+  </select>
+  
+  <select id="getPendingRequestListByReceiverId" parameterType="Integer" resultMap="detailedRequest">
+    select request_id, S.user_id as sender_user_id, S.name as sender_name,
+    R.user_id as receiver_user_id, R.name as receiver_name, 
+    status_id, status_type
+    from request join user as S on request.sender_id=S.user_id 
+    join user as R on request.receiver_id=R.user_id
+    join status on request.request_status=status.status_id 
+    where receiver_id=#{receiverId} and request.request_status=1
   </select>
   
   </mapper>
