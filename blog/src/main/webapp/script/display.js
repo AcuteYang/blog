@@ -1,6 +1,83 @@
 /**
  * 
  */
+var nav=new Vue({
+	el:"#nav",
+	
+	methods:{
+		messageClick:function(){
+			this.messageChosen=true;
+			this.commentChosen=false;
+			this.requestChosen=false;
+		},
+		commentClick:function(){
+			this.commentChosen=true;
+			this.messageChosen=false;
+			this.requestChosen=false;
+		},
+		requestClick:function(){
+			this.requestChosen=true;
+			this.messageChosen=false;
+			this.commentChosen=false;
+		},
+		boxClick:function(){
+			this.boxChosen=!this.boxChosen;
+		}
+	},
+	components:{
+		'pending-request':{
+			template:'<div class="line">\
+						<div>\
+							<img class="photo" src="/blog/images/avatar-4.jpeg"/>\
+						</div>\
+						<div class="unknown">\
+							<div class="name">{{name}}</div>\
+							<div class="recommendation">{{country}}</div>\
+						</div>\
+						<div class="deal">\
+							<div class="accepted pointer logo" v-on:click="dealRequest(3)">\
+								<i class="fa fa-check"></i>\
+							</div>\
+							<div class="declined pointer logo" v-on:click="dealRequest(4)">\
+								<i class="fa fa-times"></i>\
+							</div>\
+						</div>\
+					</div>',
+			props:['requestId','name','country'],
+			methods:{
+				dealRequest(ac){
+					var d={	
+	        		        "requestId":parseInt(this.requestId),
+	        		        "requestStatus":ac
+					}
+					$.ajax({
+						url:"/blog/user/dealRequest",
+						data:d,
+						type:"GET",
+	     		        dataType:"json",
+	     		        success:function(rep){
+	     		        	alert(rep.statusMessage)
+	     		        },
+	     		        error:function(){
+	     		        	alert("error")
+	     		        }
+					})
+				}
+			}
+		}
+	},
+	data:{
+		messageChosen:true,
+		commentChosen:false,
+		requestChosen:false,
+		boxChosen:false,
+		requestList:[],
+		numbers:[],
+		number:"123"
+	}
+})
+
+
 var request=new Vue({
     	el:"#request",
     	components:{
@@ -48,6 +125,18 @@ var request=new Vue({
     })
 
 $.ajax({
+	url:"/blog/user/getPendingRequest",
+	type:"GET",
+	dataType:"json",
+	success:function(rep){
+		nav.requestList=rep;
+	},
+	error:function(){
+		alert("wrong");
+	}
+})
+
+$.ajax({
     url:"/blog/user/getStranger",
     type:"GET",
     dataType:"json",
@@ -59,79 +148,4 @@ $.ajax({
     }
 })
 
-$.ajax({
-	url:"/blog/user/getPendingRequest",
-	type:"GET",
-	dataType:"json",
-	success:function(rep){
-		navigator.requestList=rep;
-	},
-	error:function(){
-		alert("wrong");
-	}
-})
 
-var navigator=new Vue({
-	el:"#navigator",
-	data:{
-		messageChosen:true,
-		commentChosen:false,
-		requestChosen:false,
-		boxChosen:false,
-		requestList:[],
-	},
-	methods:{
-		messageClick:function(){
-			this.messageChosen=true;
-			this.commentChosen=false;
-			this.requestChosen=false;
-		},
-		commentClick:function(){
-			this.commentChosen=true;
-			this.messageChosen=false;
-			this.requestChosen=false;
-		},
-		requestClick:function(){
-			this.requestChosen=true;
-			this.messageChosen=false;
-			this.commentChosen=false;
-		},
-		boxClick:function(){
-			this.boxChosen=!this.boxChosen;
-		}
-	},
-	components:{
-		'pending-request':{
-			template:'<div class="line">\
-						<div>\
-							<img class="photo" src="/blog/images/avatar-4.jpeg"/>\
-						</div>\
-						<div class="unknown">\
-							<div class="name">{{name}}</div>\
-							<div class="recommendation">{{country}}</div>\
-						</div>\
-						<div class="deal">\
-							<div class="pointer logo" v-on:click="dealRequest(3)">\
-								<i class="fa fa-check"></i>\
-							</div>\
-							<div class="pointer logo" v-on:click="dealRequest(4)">\
-								<i class="fa fa-times"></i>\
-							</div>\
-						</div>\
-					</div>',
-			props:['senderId','recieverId','name','country'],
-			methods:{
-				dealRequest(ac){
-					var d={	
-							"senderId":parseInt(this.senderId),
-	        		        "receiverId":parseInt(this.receiverId),
-	        		        "requestStatus":ac
-					}
-					$ajax({
-						url:""
-					})
-				}
-			},
-		}
-	}
-})

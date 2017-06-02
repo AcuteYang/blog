@@ -11,7 +11,7 @@
     <script src="/blog/script/vue.js"></script>
 </head>
 <body>
-	<div id="navigator" class="navigator">
+	<div id="nav" class="navigator">
 		<div class="left">
 			<i class="fa fa-search grey"></i>
 			<input class="input" type="text" placeholder="Search here"/>
@@ -21,102 +21,61 @@
 			<div>
 				<img class="photo" src="/blog/images/navigator-avatar.jpeg"/>
 			</div>
-		</div>
-		<div v-bind:class="{visible:boxChosen}" class="box">
-		    <div class="type">
-				<div class="message">
-				   <i v-bind:class="{chosen:messageChosen}" v-on:click="messageClick" class="fa fa-envelope tag pointer"></i> 
-				</div>
-				<div class="comment">
-				   <i v-bind:class="{chosen:commentChosen}" v-on:click="commentClick" class="fa fa-comments tag pointer"></i> 
-				</div>
-				<div class="request">
-				   <i v-bind:class="{chosen:requestChosen}" v-on:click="requestClick" class="fa fa-user-plus tag pointer"></i> 
-				</div>
-		    </div>
-		    <div class="detail" v-bind:class="{visible:messageChosen}">   
-		        <div class="description">
-                    These are your unread messages.
-                </div>              
-                <div class="line">like that series, is set primarily in Oxford. 
-                     Shaun Evans portrays a young Endeavour Morse beginning</div>
-                 <div class="line">like that series, is set primarily in Oxford. 
-                     Shaun Evans portrays a young Endeavour Morse beginning</div>
-                 <div class="line">Endeavour is a British television detective drama series.
-                 It is a prequel to the long-running Inspector Morse</div>
-                 <div class="line">Endeavour is a British television detective drama series.
-                 It is a prequel to the long-running Inspector Morse</div>
-		    </div>
-		    <div class="detail" v-bind:class="{visible:commentChosen}">  
-		        <div class="description">
-                    These are your unread comments.
-                </div>           
-                <div class="line">Endeavour is a British television detective drama series.
-                 It is a prequel to the long-running Inspector Morse</div>
-                 <div class="line">Endeavour is a British television detective drama series.
-                 It is a prequel to the long-running Inspector Morse</div>
-                 <div class="line">Endeavour is a British television detective drama series.
-                 It is a prequel to the long-running Inspector Morse</div>
-                 <div class="line">Endeavour is a British television detective drama series.
-                 It is a prequel to the long-running Inspector Morse</div>
-            </div>
-            <div class="detail" v-bind:class="{visible:requestChosen}">   
-                <div class="description">
-                    These are your unread friend requests.
-                </div>
-                <div v-for="(request,index) in requestList" v-if="index<4">
-                    <pending-request v-bind:name="request.sender.name" 
-                    v-bind:country="request.sender.currentLocation.country" 
-                    v-bind:sender-id="request.sender.userId"
-                    v-bind:receiver-id="request.receiver.userId"></pending-request>
-                </div>      
-                <div class="line"> 
-                    <div>
-                        <img class="photo" src="/blog/images/avatar-4.jpeg"/>
-                    </div>
-                    <div class="unknown">
-                        <div class="name">Heart</div>
-                        <div class="recommendation">China</div>
-                    </div>
-                    <div class="deal">
-                        <div class="pointer logo" v-on:click="dealRequest(3)">
-                            <i class="fa fa-check"></i>
-                        </div>
-                        <div class="pointer logo" v-on:click="dealRequest(4)">
-                            <i class="fa fa-times"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="line"> 
-                    <div>
-                        <img class="photo" src="/blog/images/avatar-5.jpeg"/>
-                    </div>
-                    <div class="unknown">
-                        <div class="name">Cute</div>
-                        <div class="recommendation">China</div>
-                    </div>
-                    <div class="deal">
-                        <i class="fa fa-check pointer logo"></i>
-                        <i class="fa fa-times pointer logo"></i>
-                    </div>
-                </div>
-                <div class="line"> 
-                    <div>
-                        <img class="photo" src="/blog/images/avatar-6.jpeg"/>
-                    </div>
-                    <div class="unknown">
-                        <div class="name">Sunlight</div>
-                        <div class="recommendation">China</div>
-                    </div>
-                    <div class="deal">
-                        <i class="fa fa-check pointer logo"></i>
-                        <i class="fa fa-times pointer logo"></i>
-                    </div>
-                </div>
-            </div>
-		    <div class="more">
-                <div>More</div>
-		    </div>
+			<div v-bind:class="{visible:boxChosen}" class="box">
+	            <div class="type">
+	                <div class="message">
+	                   <i v-bind:class="{chosen:messageChosen}" v-on:click="messageClick" class="fa fa-envelope tag pointer"></i> 
+	                </div>
+	                <div class="comment">
+	                   <i v-bind:class="{chosen:commentChosen}" v-on:click="commentClick" class="fa fa-comments tag pointer"></i> 
+	                </div>
+	                <div class="request">
+	                   <i v-bind:class="{chosen:requestChosen}" v-on:click="requestClick" class="fa fa-user-plus tag pointer"></i> 
+	                </div>
+	            </div>
+	            <div class="detail" v-bind:class="{visible:messageChosen}">   
+	                <div class="description">
+	                    These are your unread messages.
+	                </div>              
+	                <div class="line">like that series, is set primarily in Oxford. 
+	                     Shaun Evans portrays a young Endeavour Morse beginning</div>
+	                 <div class="line">like that series, is set primarily in Oxford. 
+	                     Shaun Evans portrays a young Endeavour Morse beginning</div>
+	                 <div class="line">Endeavour is a British television detective drama series.
+	                 It is a prequel to the long-running Inspector Morse</div>
+	                 <div class="line">Endeavour is a British television detective drama series.
+	                 It is a prequel to the long-running Inspector Morse</div>
+	            </div>
+	            <div class="detail" v-bind:class="{visible:commentChosen}">  
+	                <div class="description">
+	                    These are your unread comments.
+	                </div>           
+	                <div class="line">Endeavour is a British television detective drama series.
+	                 It is a prequel to the long-running Inspector Morse</div>
+	                 <div class="line">Endeavour is a British television detective drama series.
+	                 It is a prequel to the long-running Inspector Morse</div>
+	                 <div class="line">Endeavour is a British television detective drama series.
+	                 It is a prequel to the long-running Inspector Morse</div>
+	                 <div class="line">Endeavour is a British television detective drama series.
+	                 It is a prequel to the long-running Inspector Morse</div>
+	            </div>
+	            <div class="detail" v-bind:class="{visible:requestChosen}">   
+	                <div class="description" v-if="requestList.length==0">
+	                    All friend requests are read.
+	                </div>
+	                <div class="description" v-else>
+	                    These are your unread friend requests.
+	                </div>
+	                <div v-for="(req,index) in requestList" v-if="index<4">
+	                    <pending-request v-bind:name="req.sender.name" 
+	                    v-bind:country="req.sender.currentLocation.country" 
+	                    v-bind:request-id="req.requestId"></pending-request>
+	                </div>
+	            </div>
+	            <div class="more">
+	                <div>More</div>
+	            </div>
+	        </div>
 		</div>
 	</div>
 	<div class="header">
@@ -199,7 +158,7 @@
 			<div id="request" class="stranger card">
 			    <div v-for="(stranger,index) in strangerList" v-if="index>0&&index<4">
 			        <stranger-info v-bind:name="stranger.name" v-bind:country="stranger.currentLocation.country" 
-			        v-bind:receiver-id="stranger.userId"></stranger-info>
+			        v-bind:receiver-id="stranger.userId" v-bind:sender-id="9"></stranger-info>
 			    </div>  
 			</div>
 			<div class="title">Friend</div>

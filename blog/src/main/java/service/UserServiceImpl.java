@@ -115,12 +115,9 @@ public class UserServiceImpl implements UserService {
 		return serviceStatus;
 	}
 	
-	public ServiceStatus dealRequest(int senderId, int receiverId, int requestStatus) {
+	public ServiceStatus dealRequest(int requestId, int requestStatus) {
 		Request request=new Request();
-		User receiver=userDao.getUserById(receiverId);
-		request.setReceiver(receiver);
-		User sender=userDao.getUserById(senderId);
-		request.setSender(sender);
+		request.setRequestId(requestId);
 		Status status=statusDao.getStatus(requestStatus);
 		request.setRequestStatus(status);
 		requestDao.updateRequestStatus(request);
@@ -128,6 +125,7 @@ public class UserServiceImpl implements UserService {
 		if(requestStatus==StatusCode.ACCEPTED.toValue()){
 			serviceStatus.setStatusCode(0);
 			serviceStatus.setStatusMessage("request accepted");
+			requestDao.insertNewRelationship(request);
 		}else{
 			serviceStatus.setStatusCode(-1);
 			serviceStatus.setStatusMessage("request declined");

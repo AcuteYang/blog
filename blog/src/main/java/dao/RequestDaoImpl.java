@@ -41,6 +41,12 @@ public class RequestDaoImpl implements RequestDao {
 		return request;
 	}
 
+	public void insertNewRelationship(Request request) {
+		Request temp=sqlSession.selectOne("mapper.requestMapper.getRequestByRequestId",request.getRequestId());
+		sqlSession.insert("mapper.requestMapper.insertNewRelationship",temp);
+		sqlSession.insert("mapper.requestMapper.insertNewRelationshipViceVersa",temp);
+	}
+
 	
 
 }

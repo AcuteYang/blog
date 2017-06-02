@@ -20,9 +20,19 @@
   </insert>
   
   <update id="updateRequestStatus" parameterType="Request">
-  	update request set request_status=#{Request.requestStatus.statusId} 
-  	where request_id=#{Request.requestId}
+  	update request set request_status=#{requestStatus.statusId} 
+  	where request_id=#{requestId}
   </update>
+  
+  <select id="getRequestByRequestId" parameterType="Integer" resultMap="detailedRequest">
+    select request_id, S.user_id as sender_user_id, S.name as sender_name,
+    R.user_id as receiver_user_id, R.name as receiver_name, 
+    status_id, status_type
+    from request join user as S on request.sender_id=S.user_id 
+    join user as R on request.receiver_id=R.user_id
+    join status on request.request_status=status.status_id 
+    where request_id=#{requestId}
+  </select>
   
   <select id="getRequestListByReceiverId" parameterType="Integer" resultMap="detailedRequest">
   	select request_id, S.user_id as sender_user_id, S.name as sender_name,
@@ -46,12 +56,24 @@
   
   <select id="getPendingRequestListByReceiverId" parameterType="Integer" resultMap="detailedRequest">
     select request_id, S.user_id as sender_user_id, S.name as sender_name,
-    R.user_id as receiver_user_id, R.name as receiver_name, 
+    S.current_location as sender_current_location, location.country as sender_country,
+    R.user_id as receiver_user_id, R.name as receiver_name,  
     status_id, status_type
     from request join user as S on request.sender_id=S.user_id 
     join user as R on request.receiver_id=R.user_id
     join status on request.request_status=status.status_id 
-    where receiver_id=#{receiverId} and request.request_status=1
+    join location on S.current_location=location.location_id
+    where R.user_id=#{receiverId} and request.request_status=1
   </select>
+  
+  <insert id="insertNewRelationship" parameterType="Request">
+    insert into friend(user_id,friend_id,membership_id)
+    values(#{sender.userId},#{receiver.userId},1)
+  </insert>
+  
+  <insert id="insertNewRelationshipViceVersa" parameterType="Request">
+    insert into friend(user_id,friend_id,membership_id)
+    values(#{receiver.userId},#{sender.userId},1)
+  </insert>
   
   </mapper>

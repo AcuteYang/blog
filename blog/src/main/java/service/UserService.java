@@ -15,7 +15,7 @@ public interface UserService {
 	
 	ServiceStatus sendRequest(int senderId, int receiverId);
 	
-	ServiceStatus dealRequest(int senderId, int receiverId, int requestStatus);
+	ServiceStatus dealRequest(int requestId, int requestStatus);
 	
 	User userDisplay(String email);
 	

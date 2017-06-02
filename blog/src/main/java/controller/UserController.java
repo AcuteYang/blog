@@ -98,11 +98,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/dealRequest")
-	public String dealRequest(@RequestParam int senderId,
-			@RequestParam int receiverId, @RequestParam int requestStatus){
-		ServiceStatus status=userService.dealRequest(senderId, receiverId, requestStatus);
+	@ResponseBody
+	public ServiceStatus dealRequest(
+			@RequestParam int requestId, @RequestParam int requestStatus){
+		ServiceStatus status=userService.dealRequest(requestId, requestStatus);
 		
-		return "dealRequest";
+		return status;
 	}
 	
 	@RequestMapping(value="/register",method=RequestMethod.GET)
