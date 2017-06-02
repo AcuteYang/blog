@@ -11,30 +11,33 @@
     <script src="/blog/script/vue.js"></script>
 </head>
 <body>
-	<div class="navigator">
+	<div id="navigator" class="navigator">
 		<div class="left">
 			<i class="fa fa-search grey"></i>
 			<input class="input" type="text" placeholder="Search here"/>
 		</div>
 		<div class="right">
-			<div class="unread">3</div>
+			<div class="unread pointer" v-bind:class="{blue:boxChosen}"v-on:click="boxClick">3</div>
 			<div>
 				<img class="photo" src="/blog/images/navigator-avatar.jpeg"/>
 			</div>
 		</div>
-		<div id="box" class="box">
+		<div v-bind:class="{visible:boxChosen}" class="box">
 		    <div class="type">
 				<div class="message">
-				   <i v-bind:class="{chosen:messageChosen}" v-on:click="messageClick" class="fa fa-envelope tag"></i> 
+				   <i v-bind:class="{chosen:messageChosen}" v-on:click="messageClick" class="fa fa-envelope tag pointer"></i> 
 				</div>
 				<div class="comment">
-				   <i v-bind:class="{chosen:commentChosen}" v-on:click="commentClick" class="fa fa-comments tag"></i> 
+				   <i v-bind:class="{chosen:commentChosen}" v-on:click="commentClick" class="fa fa-comments tag pointer"></i> 
 				</div>
 				<div class="request">
-				   <i v-bind:class="{chosen:requestChosen}" v-on:click="requestClick" class="fa fa-user-plus tag"></i> 
+				   <i v-bind:class="{chosen:requestChosen}" v-on:click="requestClick" class="fa fa-user-plus tag pointer"></i> 
 				</div>
 		    </div>
-		    <div class="detail" v-bind:class="{visible:messageChosen}">               
+		    <div class="detail" v-bind:class="{visible:messageChosen}">   
+		        <div class="description">
+                    These are your unread messages.
+                </div>              
                 <div class="line">like that series, is set primarily in Oxford. 
                      Shaun Evans portrays a young Endeavour Morse beginning</div>
                  <div class="line">like that series, is set primarily in Oxford. 
@@ -44,7 +47,10 @@
                  <div class="line">Endeavour is a British television detective drama series.
                  It is a prequel to the long-running Inspector Morse</div>
 		    </div>
-		    <div class="detail" v-bind:class="{visible:commentChosen}">               
+		    <div class="detail" v-bind:class="{visible:commentChosen}">  
+		        <div class="description">
+                    These are your unread comments.
+                </div>           
                 <div class="line">Endeavour is a British television detective drama series.
                  It is a prequel to the long-running Inspector Morse</div>
                  <div class="line">Endeavour is a British television detective drama series.
@@ -54,14 +60,57 @@
                  <div class="line">Endeavour is a British television detective drama series.
                  It is a prequel to the long-running Inspector Morse</div>
             </div>
-            <div class="detail" v-bind:class="{visible:requestChosen}">               
+            <div class="detail" v-bind:class="{visible:requestChosen}">   
+                <div class="description">
+                    These are your unread friend requests.
+                </div>
+                <div v-for="(request,index) in requestList" v-if="index<4">
+                    <pending-request v-bind:name="request.sender.name" 
+                    v-bind:country="request.sender.currentLocation.country" 
+                    v-bind:sender-id="request.sender.userId"
+                    v-bind:receiver-id="request.receiver.userId"></pending-request>
+                </div>      
                 <div class="line"> 
                     <div>
-                        <img class="photo" src="/blog/images/avatar-7.jpg"/>
-                        </div>
-                        <div class="unknown">
+                        <img class="photo" src="/blog/images/avatar-4.jpeg"/>
+                    </div>
+                    <div class="unknown">
                         <div class="name">Heart</div>
                         <div class="recommendation">China</div>
+                    </div>
+                    <div class="deal">
+                        <div class="pointer logo" v-on:click="dealRequest(3)">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <div class="pointer logo" v-on:click="dealRequest(4)">
+                            <i class="fa fa-times"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"> 
+                    <div>
+                        <img class="photo" src="/blog/images/avatar-5.jpeg"/>
+                    </div>
+                    <div class="unknown">
+                        <div class="name">Cute</div>
+                        <div class="recommendation">China</div>
+                    </div>
+                    <div class="deal">
+                        <i class="fa fa-check pointer logo"></i>
+                        <i class="fa fa-times pointer logo"></i>
+                    </div>
+                </div>
+                <div class="line"> 
+                    <div>
+                        <img class="photo" src="/blog/images/avatar-6.jpeg"/>
+                    </div>
+                    <div class="unknown">
+                        <div class="name">Sunlight</div>
+                        <div class="recommendation">China</div>
+                    </div>
+                    <div class="deal">
+                        <i class="fa fa-check pointer logo"></i>
+                        <i class="fa fa-times pointer logo"></i>
                     </div>
                 </div>
             </div>
@@ -91,10 +140,10 @@
 		</div>
 		<div>
 			<div class="icon">
-				<div class="radius left">
+				<div class="radius left pointer">
 					<i class="fa fa-commenting"></i>
 				</div>
-				<div class="radius right">
+				<div class="radius right pointer">
 					<i class="fa fa-ellipsis-h"></i>
 				</div>
 			</div>
@@ -151,32 +200,32 @@
 			    <div v-for="(stranger,index) in strangerList" v-if="index>0&&index<4">
 			        <stranger-info v-bind:name="stranger.name" v-bind:country="stranger.currentLocation.country" 
 			        v-bind:receiver-id="stranger.userId"></stranger-info>
-			    </div>
+			    </div>  
 			</div>
 			<div class="title">Friend</div>
 			<div class="friend card">
-				<div class="photo round">
-					<img src="/blog/images/avatar-4.jpg"/>
+				<div class="photo round pointer">
+					<img src="/blog/images/avatar-4.jpeg"/>
 				</div>
-				<div class="photo round">
-					<img src="/blog/images/avatar-5.jpg"/>
+				<div class="photo round pointer">
+					<img src="/blog/images/avatar-5.jpeg"/>
 				</div>
-				<div class="photo round">
-					<img src="/blog/images/avatar-6.jpg"/>
+				<div class="photo round pointer">
+					<img src="/blog/images/avatar-6.jpeg"/>
 				</div>
-				<div class="photo round">
+				<div class="photo round pointer">
 					<img src="/blog/images/avatar-7.jpg"/>
 				</div>
-				<div class="photo round">
+				<div class="photo round pointer">
 					<img src="/blog/images/avatar-8.jpg"/>
 				</div>
-				<div class="photo round">
+				<div class="photo round pointer">
 					<img src="/blog/images/avatar-9.jpg"/>
 				</div>
-				<div class="photo round">
+				<div class="photo round pointer">
 					<img src="/blog/images/avatar-10.jpeg"/>
 				</div>
-				<div class="photo round">
+				<div class="photo round pointer">
 					<img src="/blog/images/avatar-11.jpeg"/>
 				</div>
 			</div>

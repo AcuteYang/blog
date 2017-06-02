@@ -63,7 +63,6 @@ public class UserController {
 		user.setEmail("email");
 		JSONObject jo = new JSONObject();
 		jo.append("user", user);
-		System.out.println(jo.toString());
 		return "display";
 	}
 	
@@ -73,11 +72,18 @@ public class UserController {
 		return userService.getStranger("sanchez38@sina.com");
 	}
 	
+	@RequestMapping(value="/getPendingRequest")
+	@ResponseBody
+	public List<Request> getPendingRequest(){
+		return userService.getPendingRequestByReceiverId("sanchez38@sina.com");
+	}
+	
 	@RequestMapping(value="/friend")
 	public String friendDisplay(@RequestParam Model model){
 		
 		return "friend";
 	}
+	
 	@RequestMapping(value="/request")
 	public String sendReqeust(){
 		return "sendRequest";
@@ -88,10 +94,6 @@ public class UserController {
 	public List<User> sendReqeust(@RequestParam int senderId, 
 			@RequestParam int receiverId){
 		ServiceStatus status=userService.sendRequest(senderId, receiverId);
-		
-		User user = new User();
-		user.setEmail("aaronguo@outlook.com");
-		user.setPassword("123456");
 		return userService.getStranger("sanchez38@sina.com");
 	}
 	

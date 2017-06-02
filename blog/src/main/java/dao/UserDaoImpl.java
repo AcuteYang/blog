@@ -58,4 +58,6 @@ public class UserDaoImpl implements UserDao {
 		User user=sqlSession.selectOne("mapper.userMapper.selectUserById",userId);
 		return user;
 	}
+	
+	
 }

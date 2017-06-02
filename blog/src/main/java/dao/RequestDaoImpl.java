@@ -26,6 +26,11 @@ public class RequestDaoImpl implements RequestDao {
 		sqlSession.update("mapper.requestMapper.updateRequestStatus", request);
 	}
 
+	public List<Request> getRequestListByReceiverId(Integer receiverId) {
+		List<Request> request=sqlSession.selectList("mapper.requestMapper.getRequestListByReceiverId", receiverId);
+		return request;
+	}
+
 	public List<Request> getRequestListBySenderId(Integer senderId) {
 		List<Request> request=sqlSession.selectList("mapper.requestMapper.getRequestListBySenderId", senderId);
 		return request;
@@ -33,6 +38,11 @@ public class RequestDaoImpl implements RequestDao {
 
 	public Request getLatestRequest() {
 		Request request = sqlSession.selectOne("mapper.requestMapper.getLatestRequest");
+		return request;
+	}
+
+	public List<Request> getPendingRequestListByReceiverId(Integer receiverId) {
+		List<Request> request=sqlSession.selectList("mapper.requestMapper.getPendingRequestListByReceiverId", receiverId);
 		return request;
 	}
 

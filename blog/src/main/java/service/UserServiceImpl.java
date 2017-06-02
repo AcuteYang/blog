@@ -169,4 +169,15 @@ public class UserServiceImpl implements UserService {
 		return serviceStatus;
 	}
 
+	public List<Request> getPendingRequestByReceiverId(String email) {
+		User user=userDao.getUserByEmail(email);
+		List<Request> request=requestDao.getPendingRequestListByReceiverId(user.getUserId());
+		return request;
+	}
+
+	public List<Request> getRequestByReceiverId(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
