@@ -255,6 +255,7 @@ h1 {
 	margin:0;
 	background-color: #fff;
 	display: flex;
+	position:relative;
 }
 
 .navigator .input{
@@ -314,8 +315,8 @@ h1 {
 
 .box {
 	position:absolute;
-	top:55px;
-	left: 75.25%;
+	top:109.5%;
+	left: 4.5%;
 	width:294px;
 	background-color:#fff;
 	margin:0;
@@ -324,6 +325,7 @@ h1 {
     display:none;
     color:#000;
     line-height:20px;
+    position:absolute;
 }
 
 .box:before {
@@ -444,6 +446,7 @@ h1 {
 	width:25px;
 	font-size:15px;
 	line-height:25px;
+	box-sizing:content-box;
 }
 
 .type .pointer {
@@ -487,11 +490,11 @@ h1 {
 .deal .accepted:hover{
 	border:solid 1.5px rgba(189,242,113,1);
 	background-color:rgba(255,255,255,0);
-	margin-top: 5.5px;
+	margin: 5.5px 8.5px 7px 11.5px;
 }
 
 .deal .declined:hover{
 	border:solid 1.5px rgba(242,131,107,1);
 	background-color:rgba(255,255,255,0);
-    margin-top: 5.5px;
+    margin: 5.5px 8.5px 7px 8.5px;
 }

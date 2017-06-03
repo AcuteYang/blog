@@ -15,6 +15,7 @@ public class User {
 	private Location currentLocation;
 	private Timestamp createdTime;
 	private List<User> friend;
+	private Picture avatar;
 	
 	public List<User> getFriend() {
 		return friend;
@@ -76,4 +77,11 @@ public class User {
 	public void setCreatedTime(Timestamp createdTime) {
 		this.createdTime = createdTime;
 	}
+	public Picture getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(Picture avatar) {
+		this.avatar = avatar;
+	}
+	
 }

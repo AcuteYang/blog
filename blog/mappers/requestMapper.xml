@@ -57,12 +57,13 @@
   <select id="getPendingRequestListByReceiverId" parameterType="Integer" resultMap="detailedRequest">
     select request_id, S.user_id as sender_user_id, S.name as sender_name,
     S.current_location as sender_current_location, location.country as sender_country,
-    R.user_id as receiver_user_id, R.name as receiver_name,  
-    status_id, status_type
+    R.user_id as receiver_user_id, R.name as receiver_name,
+    status_id, status_type, picture.picture_path as sender_picture_path
     from request join user as S on request.sender_id=S.user_id 
     join user as R on request.receiver_id=R.user_id
     join status on request.request_status=status.status_id 
     join location on S.current_location=location.location_id
+    join picture on S.avatar=picture.picture_id
     where R.user_id=#{receiverId} and request.request_status=1
   </select>
   

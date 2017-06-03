@@ -28,7 +28,7 @@ var nav=new Vue({
 		'pending-request':{
 			template:'<div class="line">\
 						<div>\
-							<img class="photo" src="/blog/images/avatar-4.jpeg"/>\
+							<img class="photo" v-bind:src="avatar"/>\
 						</div>\
 						<div class="unknown">\
 							<div class="name">{{name}}</div>\
@@ -43,7 +43,7 @@ var nav=new Vue({
 							</div>\
 						</div>\
 					</div>',
-			props:['requestId','name','country'],
+			props:['requestId','name','country','avatar'],
 			methods:{
 				dealRequest(ac){
 					var d={	
@@ -84,7 +84,7 @@ var request=new Vue({
     		'stranger-info':{
     			template:'<div class="minicard">\
 						<div class="photo">\
-    					<img class="photo" src="/blog/images/avatar-1.jpg"/>\
+    					<img class="photo" v-bind:src="avatar"/>\
     					</div>\
     					<div class="unknown">\
     					<div class="name">{{name}}</div>\
@@ -94,7 +94,7 @@ var request=new Vue({
     					<i class="fa fa-plus" v-on:click="sendRequest"></i>\
     					</div>\
     					</div>',
-				props:['senderId','receiverId','name','country'],
+				props:['senderId','receiverId','name','country','avatar'],
 				methods:{
 					sendRequest:function(){
 		        		var d={

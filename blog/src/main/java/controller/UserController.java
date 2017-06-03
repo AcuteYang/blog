@@ -75,7 +75,7 @@ public class UserController {
 	@RequestMapping(value="/getPendingRequest")
 	@ResponseBody
 	public List<Request> getPendingRequest(){
-		return userService.getPendingRequestByReceiverId("sanchez38@sina.com");
+		return userService.getPendingRequestByReceiverId("bourikas98@163.com");
 	}
 	
 	@RequestMapping(value="/friend")

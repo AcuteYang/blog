@@ -19,7 +19,7 @@
 		<div class="right">
 			<div class="unread pointer" v-bind:class="{blue:boxChosen}"v-on:click="boxClick">3</div>
 			<div>
-				<img class="photo" src="/blog/images/navigator-avatar.jpeg"/>
+				<img class="photo" src="/blog/images/navigator-avatar.jpg"/>
 			</div>
 			<div v-bind:class="{visible:boxChosen}" class="box">
 	            <div class="type">
@@ -69,7 +69,7 @@
 	                <div v-for="(req,index) in requestList" v-if="index<4">
 	                    <pending-request v-bind:name="req.sender.name" 
 	                    v-bind:country="req.sender.currentLocation.country" 
-	                    v-bind:request-id="req.requestId"></pending-request>
+	                    v-bind:request-id="req.requestId" v-bind:avatar="req.sender.avatar.picturePath"></pending-request>
 	                </div>
 	            </div>
 	            <div class="more">
@@ -158,19 +158,20 @@
 			<div id="request" class="stranger card">
 			    <div v-for="(stranger,index) in strangerList" v-if="index>0&&index<4">
 			        <stranger-info v-bind:name="stranger.name" v-bind:country="stranger.currentLocation.country" 
-			        v-bind:receiver-id="stranger.userId" v-bind:sender-id="9"></stranger-info>
+			        v-bind:receiver-id="stranger.userId" v-bind:sender-id="9" 
+			        v-bind:avatar="stranger.avatar.picturePath"></stranger-info>
 			    </div>  
 			</div>
 			<div class="title">Friend</div>
 			<div class="friend card">
 				<div class="photo round pointer">
-					<img src="/blog/images/avatar-4.jpeg"/>
+					<img src="/blog/images/avatar-4.jpg"/>
 				</div>
 				<div class="photo round pointer">
-					<img src="/blog/images/avatar-5.jpeg"/>
+					<img src="/blog/images/avatar-5.jpg"/>
 				</div>
 				<div class="photo round pointer">
-					<img src="/blog/images/avatar-6.jpeg"/>
+					<img src="/blog/images/avatar-6.jpg"/>
 				</div>
 				<div class="photo round pointer">
 					<img src="/blog/images/avatar-7.jpg"/>
@@ -182,10 +183,10 @@
 					<img src="/blog/images/avatar-9.jpg"/>
 				</div>
 				<div class="photo round pointer">
-					<img src="/blog/images/avatar-10.jpeg"/>
+					<img src="/blog/images/avatar-10.jpg"/>
 				</div>
 				<div class="photo round pointer">
-					<img src="/blog/images/avatar-11.jpeg"/>
+					<img src="/blog/images/avatar-11.jpg"/>
 				</div>
 			</div>
 		</div>

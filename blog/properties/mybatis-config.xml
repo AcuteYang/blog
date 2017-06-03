@@ -9,6 +9,7 @@
 	  <typeAlias alias="Blog" type="entity.Blog"/>
 	  <typeAlias alias="Request" type="entity.Request"/>
 	  <typeAlias alias="Status" type="entity.Status"/>
+	  <typeAlias alias="Picture" type="entity.Picture"/>
   </typeAliases>
   <mappers>
     <mapper resource="userMapper.xml"/>

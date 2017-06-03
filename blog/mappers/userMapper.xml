@@ -9,12 +9,16 @@
   	<result property="gender" column="gender"/>
   	<result property="email" column="email"/>
   	<result property="password" column="password"/>
-  	<result property="birthday" column="birthday"/>
+  	<result property="birthday"  column="birthday"/>
   	<association property="currentLocation" column="current_location" javaType="Location">
   		<id property="locationId" column="location_id"/>
   		<result property="country" column="country"/>
   		<result property="state" column="state"/>
   		<result property="city" column="city"/>
+  	</association>
+  	<association property="avatar" column="avatar" javaType="Picture">
+  	 <id property="pictureId" column="picture_id"/>
+  	 <result property="picturePath" column="picture_path"/>
   	</association>
   </resultMap>
   
@@ -109,8 +113,10 @@
    
    <select id="selectStranger" parameterType="Integer" resultMap="detailedUser">   	
    	select user.user_id as user_id, name, email, birthday, gender,
-   	location_id, country, state, city
+   	location_id, country, state, city,
+   	picture_id, picture_path
    	from user join location on location.location_id=user.current_location
+   	join picture on user.avatar=picture.picture_id
    	where user.user_id not in
    	(select friend.friend_id from friend where friend.user_id=#{userId}) 
    	and user.user_id&lt;&gt;#{userId}

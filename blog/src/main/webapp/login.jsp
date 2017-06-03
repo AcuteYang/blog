@@ -11,7 +11,7 @@
 	<body>
 		<div class="login">
 			<div class="they">
-				<img src="/blog/images/login-1.png"/>
+				<img src="/blog/images/login-1.jpg"/>
 			</div>
 			<div class="interface">
 				<form action="/blog/user/loginResult">
