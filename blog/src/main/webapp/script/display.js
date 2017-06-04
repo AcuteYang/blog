@@ -59,7 +59,7 @@ var nav=new Vue({
 	     		        	alert(rep.statusMessage)
 	     		        },
 	     		        error:function(){
-	     		        	alert("error")
+	     		        	alert("oops")
 	     		        }
 					})
 				}
@@ -71,9 +71,7 @@ var nav=new Vue({
 		commentChosen:false,
 		requestChosen:false,
 		boxChosen:false,
-		requestList:[],
-		numbers:[],
-		number:"123"
+		requestList:[]
 	}
 })
 
@@ -91,12 +89,12 @@ var request=new Vue({
     					<div class="recommendation">{{country}}</div>\
     					</div>\
     					<div class="logo request pointer">\
-    					<i class="fa fa-plus" v-on:click="sendRequest"></i>\
+    					<i class="fa fa-plus" v-on:click="sendRequest(index)"></i>\
     					</div>\
     					</div>',
-				props:['senderId','receiverId','name','country','avatar'],
+				props:['senderId','receiverId','name','country','avatar','index'],
 				methods:{
-					sendRequest:function(){
+					sendRequest(index){
 		        		var d={
 		        		        "senderId":parseInt(this.senderId),
 		        		        "receiverId":parseInt(this.receiverId)
@@ -106,9 +104,10 @@ var request=new Vue({
 		     		        data:d,
 		     		        type:"GET",
 		     		        dataType:"json",
-		     		        success:function(rep){
+		     		        success:function(rep,index){
 		     		            //request.sendStatus=rep
-		     		        	alert(rep)
+		     		        	request.strangerList.splice(index,1);
+		     		        	alert(rep.statusMessage)
 		     		        },
 		     		        error:function(){
 		     		            //request.sendStatus="error"
@@ -144,7 +143,7 @@ $.ajax({
         request.strangerList=rep;
     },
     error:function(){
-    	alert("error");
+    	alert("bad");
     }
 })
 

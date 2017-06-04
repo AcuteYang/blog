@@ -159,7 +159,7 @@
 			    <div v-for="(stranger,index) in strangerList" v-if="index>0&&index<4">
 			        <stranger-info v-bind:name="stranger.name" v-bind:country="stranger.currentLocation.country" 
 			        v-bind:receiver-id="stranger.userId" v-bind:sender-id="9" 
-			        v-bind:avatar="stranger.avatar.picturePath"></stranger-info>
+			        v-bind:avatar="stranger.avatar.picturePath" v-bind:index="index"></stranger-info>
 			    </div>  
 			</div>
 			<div class="title">Friend</div>

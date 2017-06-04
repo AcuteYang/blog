@@ -91,10 +91,10 @@ public class UserController {
 	
 	@RequestMapping(value="/sendRequest")
 	@ResponseBody
-	public List<User> sendReqeust(@RequestParam int senderId, 
+	public ServiceStatus sendReqeust(@RequestParam int senderId, 
 			@RequestParam int receiverId){
 		ServiceStatus status=userService.sendRequest(senderId, receiverId);
-		return userService.getStranger("sanchez38@sina.com");
+		return status;
 	}
 	
 	@RequestMapping(value="/dealRequest")

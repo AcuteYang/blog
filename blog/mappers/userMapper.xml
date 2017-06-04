@@ -120,6 +120,12 @@
    	where user.user_id not in
    	(select friend.friend_id from friend where friend.user_id=#{userId}) 
    	and user.user_id&lt;&gt;#{userId}
+   	and user.user_id not in
+   	(select request.sender_id from request where request.receiver_id=#{userId} 
+   	and (request.request_status=4 or request.request_status=1))
+   	and user.user_id not in 
+   	(select request.receiver_id from request where request.sender_id=#{userId}
+   	and (request.request_status=4 or request.request_status=1))
    </select>
    
    
