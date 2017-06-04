@@ -44,7 +44,7 @@ input:focus{
 }
 
 input[type="submit"]:focus{
-	border-color:rgba(0,0,0,1);
+	border-color:#6cb075;
 }
 
 h1
@@ -67,6 +67,7 @@ input.submit
 	font-size:1.2rem;
 	text-align: center;
 	margin-top: 3%;
+	border-color:#6cb075;
 }
 
 input.submit:hover
@@ -82,13 +83,6 @@ input::placeholder{
 
 input::placeholder:focus{
 	color:rgba(0,0,0);
-}
-
-.message{
-	color:rgba(133,206,249,1);
-	font-size:1rem;
-	font-weight:200;
-	margin-top: 0;
 }
 
 form{

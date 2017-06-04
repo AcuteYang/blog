@@ -44,25 +44,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/loginResult")
-	public String validatePassword(@RequestParam String email, 
-			@RequestParam String password,Model model){
+	@ResponseBody
+	public ServiceStatus validatePassword(@RequestParam String email, 
+			@RequestParam String password){
 		ServiceStatus status=userService.login(email, password);
-		model.addAttribute("message", status.getStatusMessage());
-		model.addAttribute("email",email);
-		
-		return "redirect:/user/friend";
+		return status;
 	}
 	
 	@RequestMapping(value="/display")
 	public String userDisplay(@RequestParam String email, Model model){
-		List<String> test=new ArrayList<String>();
-		test.add("1");
-		test.add("2");
-		test.add("3");
-		User user = new User();
-		user.setEmail("email");
-		JSONObject jo = new JSONObject();
-		jo.append("user", user);
 		return "display";
 	}
 	

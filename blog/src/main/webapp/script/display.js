@@ -3,7 +3,6 @@
  */
 var nav=new Vue({
 	el:"#nav",
-	
 	methods:{
 		messageClick:function(){
 			this.messageChosen=true;
@@ -105,12 +104,10 @@ var request=new Vue({
 		     		        type:"GET",
 		     		        dataType:"json",
 		     		        success:function(rep,index){
-		     		            //request.sendStatus=rep
 		     		        	request.strangerList.splice(index,1);
 		     		        	alert(rep.statusMessage)
 		     		        },
 		     		        error:function(){
-		     		            //request.sendStatus="error"
 		     		        	alert("error")
 		     		        }
 		     		    })
