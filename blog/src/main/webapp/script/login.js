@@ -4,15 +4,19 @@
 var login=new Vue({
 	el:"#login",
 	data: {
-		email:"",
+		type:"email",
+		unique:"",
 		password:"",
-		message:""
+		message:"",
+		emailChosen:true,
+		nameChosen:false,
 	},
 	methods:{
 		requestLogin(){
 			var info={
-				"email":this.email,
-				"password":this.password
+				"unique":this.unique,
+				"password":this.password,
+				"type":this.type
 			}
 			$.ajax({
 				url:"/blog/user/loginResult",
@@ -21,10 +25,9 @@ var login=new Vue({
 				dataType:"json",
 				success:function(status){
 					if(status.statusCode==0){
-						login.message=status.statusMessage;
 						window.location.href="/blog/user/display/?email="
 					}else{
-						login.email="";
+						login.login="";
 						login.password="";
 						login.message=status.statusMessage;
 					}
@@ -33,6 +36,21 @@ var login=new Vue({
 					alert("none");
 				}
 			})
+		},
+		emailClick(){
+			this.type="email";
+			this.emailChosen=true;
+			this.nameChosen=false;
+			this.unique="";
+			this.password="";
+		},
+		nameClick(){
+			this.type="name";
+			this.emailChosen=false;
+			this.nameChosen=true;
+			this.unique="";
+			this.password="";
 		}
 	}
 })
+

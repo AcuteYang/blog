@@ -23,8 +23,8 @@ public class UserDaoImpl implements UserDao {
 		this.sqlSession = sqlSession;
 	}
 
-	public String getPassword(String email) {
-		String password=sqlSession.selectOne("mapper.userMapper.getPassword",email);
+	public String getPasswordByEmail(String email) {
+		String password=sqlSession.selectOne("mapper.userMapper.getPasswordByEmail",email);
 		return password;
 	}
 	
@@ -57,6 +57,16 @@ public class UserDaoImpl implements UserDao {
 	public User getUserById(Integer userId) {
 		User user=sqlSession.selectOne("mapper.userMapper.selectUserById",userId);
 		return user;
+	}
+
+	public User getUserByName(String name) {
+		User user = sqlSession.selectOne("mapper.userMapper.selectUserByName",name);
+		return user;
+	}
+
+	public String getPasswordByName(String name) {
+		String password=sqlSession.selectOne("mapper.userMapper.getPasswordByName",name);
+		return password;
 	}
 	
 	

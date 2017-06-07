@@ -11,13 +11,21 @@
         <script src="/blog/script/vue.js"></script>
 	</head>
 	<body>
-		<div class="login">
+		<div id="login" class="login">
 			<div class="they">
 				<img src="/blog/images/login-1.jpg"/>
 			</div>
-			<div id="login" class="interface">
-				<label>Email</label><br><input v-model="email" id="email" name="email" type="text"/><br>
-				<label>Password</label><br><input v-model="password" id="password" name="password" type="password"/><br>
+			<div class="interface">
+                <div class="option">
+                    <div v-bind:class="{email:emailChosen}" v-on:click="emailClick" class="pointer">Email</div>
+                    <div v-bind:class="{name:nameChosen}" v-on:click="nameClick" class="pointer">Name</div>
+                </div>
+				<input v-model="unique" id="email" name="email" type="text"/><br>
+				<div class="option">
+				    <div v-bind:class="{email:emailChosen}">Password</div>
+				    <div v-bind:class="{name:nameChosen}">Password</div>
+				</div>
+				<input v-model="password" id="password" name="password" type="password"/><br>
 				<p class="message">{{message}}</p>
 				<div class="enter">
 				    <input v-on:click="requestLogin" class="submit" type="submit" value="ENTER">

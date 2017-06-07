@@ -45,9 +45,16 @@ public class UserController {
 	
 	@RequestMapping(value="/loginResult")
 	@ResponseBody
-	public ServiceStatus validatePassword(@RequestParam String email, 
-			@RequestParam String password){
-		ServiceStatus status=userService.login(email, password);
+	public ServiceStatus validatePasswordByEmail(@RequestParam String unique, 
+			@RequestParam String password, @RequestParam String type){
+		ServiceStatus status=new ServiceStatus();
+		if(type.equals("email")){
+			String email=unique;
+			status=userService.loginByEmail(email, password);
+		}else{
+			String name=unique;
+			status=userService.loginByName(name, password);
+		}
 		return status;
 	}
 	

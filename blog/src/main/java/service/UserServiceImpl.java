@@ -59,8 +59,8 @@ public class UserServiceImpl implements UserService {
 		this.requestDao = requestDao;
 	}
 
-	public ServiceStatus login(String email, String password) {
-		String pwd=userDao.getPassword(email);
+	public ServiceStatus loginByEmail(String email, String password) {
+		String pwd=userDao.getPasswordByEmail(email);
 		ServiceStatus serviceStatus=new ServiceStatus();
 		if(pwd==null){
 			serviceStatus.setStatusCode(1);
@@ -176,6 +176,23 @@ public class UserServiceImpl implements UserService {
 	public List<Request> getRequestByReceiverId(String email) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public ServiceStatus loginByName(String name, String password) {
+		String pwd=userDao.getPasswordByName(name);
+		ServiceStatus serviceStatus=new ServiceStatus();
+		if(pwd==null){
+			serviceStatus.setStatusCode(1);
+			serviceStatus.setStatusMessage("username not found");
+		}
+		else if(pwd.equals(password)){
+			serviceStatus.setStatusCode(0);
+			serviceStatus.setStatusMessage("login successfully");
+		}else{
+			serviceStatus.setStatusCode(2);
+			serviceStatus.setStatusMessage("password wrong");
+		}
+		return serviceStatus;
 	}
 
 }

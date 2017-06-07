@@ -26,7 +26,7 @@
 	                <div class="message">
 	                   <i v-bind:class="{chosen:messageChosen}" v-on:click="messageClick" class="fa fa-envelope tag pointer"></i> 
 	                </div>
-	                <div class="comment">
+	                <div class="comment">.;
 	                   <i v-bind:class="{chosen:commentChosen}" v-on:click="commentClick" class="fa fa-comments tag pointer"></i> 
 	                </div>
 	                <div class="request">

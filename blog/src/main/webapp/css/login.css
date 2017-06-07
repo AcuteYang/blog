@@ -1,15 +1,18 @@
-body{
+body {
 	text-align: center;
 }
-label{
+
+.login label {
 	font-size:1.4rem;
+	color:rgba(55,69,81,.2);
 }
 
-input{
+.login input {
 	font-size:1.5rem;
+	width:96.5%;
 }
 
-h1{
+h1 {
 	font-size:4rem;
 	font-weight:400;
 }
@@ -23,13 +26,17 @@ h1{
 
 .interface{
 	width:40%;
-	text-align: left;
-	margin-right: 5%;
-	margin-left: 5%;
+	margin:auto;
+	color:rgba(55,69,81,.2);
+	
 }
 
 .they{
 	width:60%;
+}
+
+.pointer:hover {
+    cursor:pointer;
 }
 
 .login .message {
@@ -41,4 +48,33 @@ p {
 	height:15px;
 }
 
+.email {
+	text-align:left;
+	color:rgba(55,69,81,.8);
+	width:100%;	
+}
 
+.email:hover {
+	cursor:auto;
+}
+
+.name {
+	text-align:right;
+	color:rgba(55,69,81,.8);
+	width:100%;
+}
+
+.name:hover {
+	cursor:auto;
+}
+
+.visible {
+	display:none;
+}
+
+.option {
+	display:inline-flex;
+	margin:0;
+	width:100%;
+	font-size:20px;
+}

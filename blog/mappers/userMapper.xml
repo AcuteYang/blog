@@ -26,7 +26,7 @@
   	<collection property="friend" ofType="User" resultMap="detailedUser" columnPrefix="friend_"/>
   </resultMap>
   <select id="selectUser" resultMap="detailedUser">
-    select * from user
+    select * from user 
   </select>
   
   <insert id="insertUser">
@@ -58,9 +58,9 @@
   		page_template_id=#{Template.templateId}
   	where user_id=#{userId}
   </update>
-  <select id="selectUserByName" resultMap="detailedUser" parameterType="String">
+  <!--select id="selectUserByName" resultMap="detailedUser" parameterType="String">
   	select * from user where name=#{name} order by user_id
-  </select>
+  </select-->
   <select id="selectUserByLocation" resultMap="detailedUser">
   	select * from user join location on user.current_location=location.loctiaon_id 
   	where location.country=#{Location.country} and location.state=#{Location.state} and location.city=#{Location.city}
@@ -94,8 +94,12 @@
    	limit 10 
    </select>
    
-   <select id="getPassword" resultType="String" parameterType="String">
+   <select id="getPasswordByEmail" resultType="String" parameterType="String">
    	select password from user where email=#{email}
+   </select>
+   
+   <select id="getPasswordByName" resultType="String" parameterType="String">
+    select password from user where name=#{name}
    </select>
    
    <insert id="insertNewUser" parameterType="Map">
@@ -127,6 +131,13 @@
    	(select request.receiver_id from request where request.sender_id=#{userId}
    	and (request.request_status=4 or request.request_status=1))
    </select>
-   
+   <select id="selectUserByName" parameterType="String" resultMap="detailedUser">
+    select user_id, name, gender, email, password, birthday,
+    location_id, country, state, city, picture_id, picture_path
+    from user join location 
+    on user.current_location=location.location_id 
+    join picture on user.avatar=picture.picture_id
+    where name=#{name}
+   </select>
    
 </mapper>

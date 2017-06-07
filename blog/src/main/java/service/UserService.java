@@ -7,7 +7,9 @@ import entity.User;
 import utility.ServiceStatus;
 
 public interface UserService {
-	ServiceStatus login(String email, String password);
+	ServiceStatus loginByEmail(String email, String password);
+	
+	ServiceStatus loginByName(String name, String password);
 	
 	ServiceStatus register(String name, String email, String password,
 			String passwordConfirmed, String birthday, String gender,
