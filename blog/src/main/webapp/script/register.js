@@ -1,8 +1,8 @@
 /**
  * 
  */
-var left=new Vue({
-	el:"#left",
+var register=new Vue({
+	el:"#register",
 	data:{
 		name:"",
 		email:"",
@@ -14,9 +14,36 @@ var left=new Vue({
 		passwordMismatch:"",
 		passwordConfirmedError:false,
 		passwordConfirmedMismatch:"",
-		passwordType:"password"
+		passwordType:"password",
+		birthdayYear:"",
+		birthdayMonth:"",
+		birthdayDay:"",
+		gender:"",
+		country:"",
+		city:"",
+		state:"",
+		dateError:false,
+		dateMismatch:"",
+		basicChosen:true,
+		eduChosen:false,
+		workChosen:false,
 	},
 	methods:{
+		basicClick:function(){
+			this.basicChosen=true;
+			this.eduChosen=false;
+			this.workChosen=false;
+		},
+		eduClick:function(){
+			this.eduChosen=true;
+			this.basicChosen=false;
+			this.workChosen=false;
+		},
+		workClick:function(){
+			this.workChosen=true;
+			this.basicChosen=false;
+			this.eduChosen=false;
+		},
 		emailValidation:function(){
 			var emailPattern=/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/;
 			this.emailError=!emailPattern.test(this.email);
@@ -54,25 +81,8 @@ var left=new Vue({
 			}else{
 				pwd.type="password";
 			}
-		}
-	}
-})
-
-var right=new Vue({
-	el:"#right",
-	data:{
-		birthdayYear:"",
-		birthdayMonth:"",
-		birthdayDay:"",
-		gender:"",
-		country:"",
-		city:"",
-		state:"",
-		dateError:false,
-		dateMismatch:""
-	},
-	methods:{
-		dateValidation(){
+		},
+		dateValidation:function(){
 			this.dateError=!dateCheck(this.birthdayYear, this.birthdayMonth, this.birthdayDay);
 			if(this.dateError){
 				this.dateMismatch="invalid";
@@ -80,9 +90,9 @@ var right=new Vue({
 				this.dateMismatch="";
 			}
 		}
-		
 	}
 })
+
 
 function dateCheck(Ryear, Rmonth, Rday){
 	var year = parseInt(Ryear);

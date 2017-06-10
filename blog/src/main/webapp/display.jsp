@@ -17,7 +17,7 @@
 			<input class="input" type="text" placeholder="Search here"/>
 		</div>
 		<div class="right">
-			<div class="unread pointer" v-bind:class="{blue:boxChosen}"v-on:click="boxClick">3</div>
+			<div class="unread pointer" v-bind:class="{blue:boxChosen}" v-on:click="boxClick">3</div>
 			<div>
 				<img class="photo" src="/blog/images/navigator-avatar.jpg"/>
 			</div>
@@ -26,7 +26,7 @@
 	                <div class="message">
 	                   <i v-bind:class="{chosen:messageChosen}" v-on:click="messageClick" class="fa fa-envelope tag pointer"></i> 
 	                </div>
-	                <div class="comment">.;
+	                <div class="comment">
 	                   <i v-bind:class="{chosen:commentChosen}" v-on:click="commentClick" class="fa fa-comments tag pointer"></i> 
 	                </div>
 	                <div class="request">

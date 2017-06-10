@@ -44,6 +44,11 @@ body{
 	display:inline-block;
 }
 
+.radius:hover {
+	color:white;
+	background-color:#6cb075;
+}
+
 .column{
 	text-transform:uppercase;
 	font-size:1.1rem;
@@ -52,9 +57,8 @@ body{
 	margin:0 10px;
 }
 
-.chosen{
-	color:white;
-	background-color:#6cb075;
+.column:hover {
+	color:#6cb075;
 }
 
 .current{
@@ -66,14 +70,8 @@ h1{
 	margin-top:2%;
 }
 
-form{
-	width:65%;
-	margin-left:auto;
-	margin-right:auto;
-}
-
 .form{
-	width:47.5%;
+	width:40.5%;
 	float:left;
 	text-align:left;
 }
@@ -126,8 +124,12 @@ label{
 	padding-right:0;
 }
 
-.form.left{
-	margin-right:5%;
+.form.left {
+	margin:auto 3% auto 6%;
+}
+
+.form.right {
+	margin:auto 1% auto 3%;
 }
 
 .error{
@@ -143,3 +145,35 @@ label{
 	text-transform:capitalize;
 }
 
+.pointer:hover {
+	cursor:pointer;
+}
+
+.page {
+	display:none;
+}
+
+.turner {
+	margin:auto;
+    font-size:40px;
+    line-height:47px;
+    text-align:center;
+}
+
+.visible {
+	display:inline-flex;
+}
+
+.fa.fa-angle-right, .fa.fa-angle-left{
+	font-size:43px;
+	line-height:47px;
+}
+
+.radius.chosen {
+	background-color:#6cb075;
+	color:white;
+}
+
+.column.chosen {
+    color:#6cb075;	
+}
